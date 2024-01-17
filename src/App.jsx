@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import DataGridDemo from './components/DataGridDemo';
 
 const App = () => {
   return (
-    <div>ben app sayfasiyim</div>
+    <>
+      {/* <Banner /> */}
+      <DataGridDemo />
+      
+    </>
   )
 }
 
-export default App
+export default App;
