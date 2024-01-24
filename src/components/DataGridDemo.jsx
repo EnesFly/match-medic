@@ -35,7 +35,7 @@ const columns = [
 ];
 
 const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 14 },
+  { id: 8965, lastName: 'Snow', firstName: 'Jon', age: 14 },
   { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 31 },
   { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 31 },
   { id: 4, lastName: 'Stark', firstName: 'Arya', age: 11 },

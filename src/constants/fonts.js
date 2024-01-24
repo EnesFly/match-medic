@@ -6,3 +6,4 @@ const typography = {
     fontWeightBold : 700,
 
 }
+
