@@ -7,8 +7,21 @@ export default function ButtonComponent() {
 
     return (
         <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '10%' }}>
-            <Button variant="text">You have selected {selectedRecipients} recipients</Button>
-            <Button variant="contained" color="primary">
+            
+            <Button variant="text">
+                You have selected
+                &nbsp;
+                <span style={{ fontSize: '1.2em' }}>{selectedRecipients}</span>
+                &nbsp;
+                recipients
+            </Button>
+
+            <Button 
+                variant="contained" 
+                color="primary"
+                // Disable the button when there are less then 1 recipients selected.
+                disabled={selectedRecipients < 1}
+            >
                 Continue
             </Button>
         </div>
