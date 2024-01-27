@@ -3,6 +3,8 @@ import DataGridDemo from './components/DataGridDemo';
 import Appbar from './layout/Appbar'
 import Card from './components/Card';
 import Checkbox from './components/CheckBox'
+import { Button } from '@mui/material';
+import ButtonComponent from './components/Button';
 const App = () => {
   
   return (
@@ -35,6 +37,7 @@ const App = () => {
           <Checkbox/>
         </div>
       </div>
+      <ButtonComponent/>
     </>
   )
 }
