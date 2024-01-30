@@ -5,9 +5,6 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Box from '@mui/material/Box';
@@ -42,20 +39,39 @@ export default function MenuAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Photos
+            MATCH MEDIC
           </Typography>
           {auth && (
-            <div>
+            <div >
+                <IconButton
+                size="large"
+                color="inherit"
+                sx={{m:1}}
+                >
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                  About Us
+                </Typography>
+              </IconButton>
               <IconButton
                 size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
                 color="inherit"
+                sx={{m:1}}
               >
-                <AccountCircle />
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                  FAQ
+                </Typography>
               </IconButton>
+
+              <IconButton
+                size="large"
+                color="inherit"
+                sx={{m:1}}
+              >
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                  Log in
+                </Typography>
+              </IconButton>
+              
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
