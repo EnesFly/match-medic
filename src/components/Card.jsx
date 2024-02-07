@@ -32,14 +32,7 @@ export default function MediaCard({
         <Button size="small">Learn More</Button> 
       </CardActions> */}
     </Card>
-    <div style={{display: 'flex', alignItems: 'center', marginTop:10}}>
-          <Checkbox
-            checked={isChecked}
-            onChange={onCheckboxChange} />
-          <Typography gutterBottom variant="h5" component="div" sx={{padding:0, marginBottom: 0}}>
-            {title}
-          </Typography>
-    </div>
+    
   </>
   );
 }

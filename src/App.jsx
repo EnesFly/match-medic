@@ -1,9 +1,11 @@
 
 import React from 'react';
 import Appbar from './layout/Appbar'
-import { CssBaseline } from '@mui/material';
+import LoginForm from './layout/LoginForm';
+import { CssBaseline, Typography } from '@mui/material';
 import ButtonComponent from './components/Button';
 import CardGrid from './components/CardGrid';
+import MessageForm from './layout/MessageForm';
 
 import arcanineImage from './assets/dummyassets/arcanine.gif';
 import charizardMegaxImage from './assets/dummyassets/charizard-megax.gif';
@@ -25,9 +27,7 @@ const App = () => {
       isCheckedArray: updatedArray
     });
   };
-  
-  
-//Clinics ll come from API?
+
 const DummyData = [
   {
     id: 0,
@@ -64,15 +64,21 @@ const DummyData = [
   
   return (
     <>
-      <CssBaseline></CssBaseline>
-      <Appbar/>
-      <CardGrid
-        cardData = {DummyData}
-        onCheckboxChange={handleCheckboxChange}
-        isCheckedArray={state.isCheckedArray}
-      />
+      <div style={{display:"flex", flexDirection:"column", gap:10}}>
+        <CssBaseline></CssBaseline>
+        <Appbar/>
+        <LoginForm></LoginForm>
+        <Typography sx={{paddingTop:1, paddingBottom:2}} variant='h5' align='center'> Select Clinics</Typography>
+        <CardGrid
+          cardData = {DummyData}
+          onCheckboxChange={handleCheckboxChange}
+          isCheckedArray={state.isCheckedArray}
+        />
+        <ButtonComponent></ButtonComponent>
 
-      <ButtonComponent/>
+        <MessageForm></MessageForm>
+
+      </div>
     </>
   )
 }
