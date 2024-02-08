@@ -7,6 +7,9 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
+import { signUp } from './auth-services';
+
+
 const LoginForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -91,7 +94,7 @@ const LoginForm = () => {
 
           
           <FormControlLabel  control={<Checkbox defaultChecked />} flexWrap={"wrap"} label="lorem ipsum da ipsum da ipsum" />
-          <Button variant="contained" color="inherit" sx={{borderRadius:"3em"}}>Login</Button>
+          <Button variant="contained" color="inherit" sx={{borderRadius:"3em"}}>Sign up</Button>
       </Stack>
 
       <Stack sx={{
