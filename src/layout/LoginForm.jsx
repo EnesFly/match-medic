@@ -16,7 +16,9 @@ const inputProps = {
 
         }} };
 const styles={
-    textInput:{width:"20rem"}
+    textInput:{width:"20rem",
+    
+  }
 }
   return <Box sx={{
     padding:"2rem",
@@ -44,6 +46,7 @@ const styles={
         justifyContent="space-between"
         alignItems="center"
         gap={1}
+      
 
         >
           <Typography 
