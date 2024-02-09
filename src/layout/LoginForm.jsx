@@ -6,12 +6,16 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { signUp, signIn } from '../components/authentication/auth-services'; // Make sure to import signIn
+import { signUp, signIn } from '../components/authentication/auth-services';
 
 const LoginForm = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // State for sign-up
+  const [signUpEmail, setSignUpEmail] = useState('');
+  const [signUpPassword, setSignUpPassword] = useState('');
+
+  // Separate state for log-in
+  const [logInEmail, setLogInEmail] = useState('');
+  const [logInPassword, setLogInPassword] = useState('');
 
   const inputProps = {
     textInput: {
@@ -26,26 +30,22 @@ const LoginForm = () => {
   };
 
   const handleSignUp = async () => {
-    console.log('Sign up button clicked, email:', email, 'password:', password);
+    console.log('Sign up button clicked, email:', signUpEmail, 'password:', signUpPassword);
     try {
-      await signUp(email, password);
+      await signUp(signUpEmail, signUpPassword);
       console.log('User created successfully!');
-      // Here, you can redirect the user or clear the form, etc.
     } catch (error) {
       console.error('Error signing up:', error.message);
-      // Handle errors here, such as displaying a message to the user
     }
   };
 
   const handleSignIn = async () => {
-    console.log('Log in button clicked, email:', email, 'password:', password);
+    console.log('Log in button clicked, email:', logInEmail, 'password:', logInPassword);
     try {
-      const userCredential = await signIn(email, password);
+      const userCredential = await signIn(logInEmail, logInPassword);
       console.log('User logged in successfully:', userCredential.user);
-      // Redirect the user or clear the form here
     } catch (error) {
       console.error('Error logging in:', error.message);
-      // Handle log-in errors here
     }
   };
 
@@ -100,8 +100,8 @@ const LoginForm = () => {
             label="Email Address"
             variant="outlined"
             size='small'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={signUpEmail}
+            onChange={(e) => setSignUpEmail(e.target.value)}
           />
 
           <TextField
@@ -110,11 +110,10 @@ const LoginForm = () => {
             label="Password"
             variant="outlined"
             size='small'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={signUpPassword}
+            onChange={(e) => setSignUpPassword(e.target.value)}
           />
 
-          
           <FormControlLabel  control={<Checkbox defaultChecked />} flexWrap={"wrap"} label="lorem ipsum da ipsum da ipsum" />
           <Button variant="contained" color="inherit" sx={{ borderRadius: "3em" }} onClick={handleSignUp}>Sign up</Button>
       </Stack>
@@ -129,7 +128,6 @@ const LoginForm = () => {
         justifyContent="space-between"
         alignItems="center"
         gap={1}
-
         >
           <Typography 
             variant='h6'
@@ -144,24 +142,21 @@ const LoginForm = () => {
                 <TextField
                 sx={styles.textInput}
                 InputProps={inputProps.textInput}
-                id="outlined-basic" 
-                label="email address" 
+                label="Email Address"
                 variant="outlined"
                 size='small'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)} // Ensure these fields are intended for login, not signup
+                value={logInEmail}
+                onChange={(e) => setLogInEmail(e.target.value)}
                 />
-                
                 
                 <TextField 
                 sx={styles.textInput}
                 InputProps={inputProps.textInput}
-                id="outlined-basic" 
-                label="password" 
+                label="Password"
                 variant="outlined"
                 size='small'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)} // Ensure these fields are intended for login, not signup
+                value={logInPassword}
+                onChange={(e) => setLogInPassword(e.target.value)}
                 />
             </Stack>
             
