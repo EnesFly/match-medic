@@ -6,8 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { signUp } from '../components/authentication/auth-services';
-
+import { signUp, signIn } from '../components/authentication/auth-services'; // Make sure to import signIn
 
 const LoginForm = () => {
   const [name, setName] = useState('');
@@ -38,6 +37,18 @@ const LoginForm = () => {
     }
   };
 
+  const handleSignIn = async () => {
+    console.log('Log in button clicked, email:', email, 'password:', password);
+    try {
+      const userCredential = await signIn(email, password);
+      console.log('User logged in successfully:', userCredential.user);
+      // Redirect the user or clear the form here
+    } catch (error) {
+      console.error('Error logging in:', error.message);
+      // Handle log-in errors here
+    }
+  };
+
   return (
     <Box sx={{
       padding: "2rem",
@@ -55,7 +66,6 @@ const LoginForm = () => {
         direction="row"
         gap={5}
       >
-        {/* Signup Form */}
         <Stack sx={{
           border: "1px solid rgb(204, 204, 204)",
           padding: "2rem",
@@ -138,6 +148,8 @@ const LoginForm = () => {
                 label="email address" 
                 variant="outlined"
                 size='small'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)} // Ensure these fields are intended for login, not signup
                 />
                 
                 
@@ -148,13 +160,12 @@ const LoginForm = () => {
                 label="password" 
                 variant="outlined"
                 size='small'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)} // Ensure these fields are intended for login, not signup
                 />
             </Stack>
             
-            
-          
-          
-          <Button color="inherit" variant="contained" sx={{borderRadius:"3em"}}> Log in</Button>
+          <Button color="inherit" variant="contained" sx={{borderRadius:"3em"}} onClick={handleSignIn}> Log in</Button>
         </Stack>
       </Stack>
     </Box>
