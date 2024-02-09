@@ -6,8 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
-import { signUp } from './auth-services';
+import { signUp } from '../components/authentication/auth-services';
 
 
 const LoginForm = () => {
@@ -27,6 +26,18 @@ const LoginForm = () => {
     textInput: { width: "20rem" }
   };
 
+  const handleSignUp = async () => {
+    console.log('Sign up button clicked, email:', email, 'password:', password);
+    try {
+      await signUp(email, password);
+      console.log('User created successfully!');
+      // Here, you can redirect the user or clear the form, etc.
+    } catch (error) {
+      console.error('Error signing up:', error.message);
+      // Handle errors here, such as displaying a message to the user
+    }
+  };
+
   return (
     <Box sx={{
       padding: "2rem",
@@ -44,6 +55,7 @@ const LoginForm = () => {
         direction="row"
         gap={5}
       >
+        {/* Signup Form */}
         <Stack sx={{
           border: "1px solid rgb(204, 204, 204)",
           padding: "2rem",
@@ -94,7 +106,7 @@ const LoginForm = () => {
 
           
           <FormControlLabel  control={<Checkbox defaultChecked />} flexWrap={"wrap"} label="lorem ipsum da ipsum da ipsum" />
-          <Button variant="contained" color="inherit" sx={{borderRadius:"3em"}}>Sign up</Button>
+          <Button variant="contained" color="inherit" sx={{ borderRadius: "3em" }} onClick={handleSignUp}>Sign up</Button>
       </Stack>
 
       <Stack sx={{
@@ -147,6 +159,6 @@ const LoginForm = () => {
       </Stack>
     </Box>
   );
-}
+};
 
 export default LoginForm;
