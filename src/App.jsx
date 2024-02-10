@@ -5,7 +5,8 @@ import { CssBaseline, Typography } from '@mui/material';
 import ButtonComponent from './components/Button';
 import CardGrid from './components/CardGrid';
 import MessageForm from './layout/MessageForm';
-import { db } from "./firebase"; // Make sure this path is correct
+import { db } from "./firebase"; // Adjusted import path to match your firebase-config file
+import { collection, getDocs } from 'firebase/firestore'; // Import collection and getDocs for Firestore
 
 import arcanineImage from './assets/dummyassets/arcanine.gif';
 import charizardMegaxImage from './assets/dummyassets/charizard-megax.gif';
@@ -14,10 +15,11 @@ import laprasImage from './assets/dummyassets/lapras.gif';
 import dragoniteImage from './assets/dummyassets/dragonite.gif';
 import gengarMegaImage from './assets/dummyassets/gengar-mega.gif';
 
+
 const App = () => {
   const [state, setState] = useState({
     isCheckedArray: [false, false, false, false, false, false],
-    clinics: [] // Added state to hold clinics data
+    clinics: [] // State to hold clinics data
   });
 
   const handleCheckboxChange = (index) => {
@@ -29,12 +31,12 @@ const App = () => {
     });
   };
 
-  // Fetch clinics data from Firestore
+  // Fetch clinics data from Firestore using the modular approach
   useEffect(() => {
     const fetchClinics = async () => {
-      const db = firebase.firestore();
-      const clinicCollection = await db.collection('clinics').get();
-      const clinicsData = clinicCollection.docs.map(doc => ({
+      const clinicsCol = collection(db, 'clinics'); // Use the collection function with db and collection name
+      const clinicSnapshot = await getDocs(clinicsCol); // Use getDocs to fetch the documents
+      const clinicsData = clinicSnapshot.docs.map(doc => ({
         id: doc.id, // Use Firestore doc ID
         image: doc.data().logo, // Assuming the logo URL is stored here
         title: doc.data().name // Assuming the clinic name is stored here
@@ -50,11 +52,11 @@ const App = () => {
 
   return (
     <>
-      <div style={{display:"flex", flexDirection:"column", gap:10}}>
+      <div style={{display: "flex", flexDirection: "column", gap: 10}}>
         <CssBaseline />
         <Appbar />
         <LoginForm />
-        <Typography sx={{paddingTop:1, paddingBottom:2}} variant='h5' align='center'>Select Clinics</Typography>
+        <Typography sx={{paddingTop: 1, paddingBottom: 2}} variant='h5' align='center'>Select Clinics</Typography>
         <CardGrid
           cardData={state.clinics} // Use fetched clinics data
           onCheckboxChange={handleCheckboxChange}
