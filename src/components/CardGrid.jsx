@@ -25,8 +25,8 @@ const CardGrid = ({
                 <Button>
                   <Card 
                   key={index}
-                  image={card.image}
-                  title={card.title}
+                  image={card.logo}
+                  title={card.name}
                   link={card.link}
                   
               />

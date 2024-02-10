@@ -1,11 +1,11 @@
-
-import React from 'react';
-import Appbar from './layout/Appbar'
+import React, { useEffect, useState } from 'react';
+import Appbar from './layout/Appbar';
 import LoginForm from './layout/LoginForm';
 import { CssBaseline, Typography } from '@mui/material';
 import ButtonComponent from './components/Button';
 import CardGrid from './components/CardGrid';
 import MessageForm from './layout/MessageForm';
+import { db } from "./firebase"; // Make sure this path is correct
 
 import arcanineImage from './assets/dummyassets/arcanine.gif';
 import charizardMegaxImage from './assets/dummyassets/charizard-megax.gif';
@@ -15,8 +15,9 @@ import dragoniteImage from './assets/dummyassets/dragonite.gif';
 import gengarMegaImage from './assets/dummyassets/gengar-mega.gif';
 
 const App = () => {
-  const [state, setState] = React.useState({
-    isCheckedArray : [false, false, false, false, false, false]
+  const [state, setState] = useState({
+    isCheckedArray: [false, false, false, false, false, false],
+    clinics: [] // Added state to hold clinics data
   });
 
   const handleCheckboxChange = (index) => {
@@ -28,59 +29,42 @@ const App = () => {
     });
   };
 
-const DummyData = [
-  {
-    id: 0,
-    image: arcanineImage,
-    title: 'Card 1',
-  },
-  {
-    id: 1,
-    image: charizardMegaxImage,
-    title: 'Card 2',
-  },
-  {
-    id: 2,
-    image: charizardMegayImage,
-    title: 'Card 3',
-  },
-  {
-    id: 3,
-    image: laprasImage,
-    title: 'Card 4',
-  },
-  {
-    id: 4,
-    image: dragoniteImage,
-    title: 'Card 5',
-  },
-  {
-    id: 5,
-    image: gengarMegaImage,
-    title: 'Card 6',
-  },
-];
+  // Fetch clinics data from Firestore
+  useEffect(() => {
+    const fetchClinics = async () => {
+      const db = firebase.firestore();
+      const clinicCollection = await db.collection('clinics').get();
+      const clinicsData = clinicCollection.docs.map(doc => ({
+        id: doc.id, // Use Firestore doc ID
+        image: doc.data().logo, // Assuming the logo URL is stored here
+        title: doc.data().name // Assuming the clinic name is stored here
+      }));
+      setState(prevState => ({
+        ...prevState,
+        clinics: clinicsData
+      }));
+    };
 
-  
+    fetchClinics();
+  }, []);
+
   return (
     <>
       <div style={{display:"flex", flexDirection:"column", gap:10}}>
-        <CssBaseline></CssBaseline>
-        <Appbar/>
-        <LoginForm></LoginForm>
-        <Typography sx={{paddingTop:1, paddingBottom:2}} variant='h5' align='center'> Select Clinics</Typography>
+        <CssBaseline />
+        <Appbar />
+        <LoginForm />
+        <Typography sx={{paddingTop:1, paddingBottom:2}} variant='h5' align='center'>Select Clinics</Typography>
         <CardGrid
-          cardData = {DummyData}
+          cardData={state.clinics} // Use fetched clinics data
           onCheckboxChange={handleCheckboxChange}
           isCheckedArray={state.isCheckedArray}
         />
-        <ButtonComponent></ButtonComponent>
-
-        <MessageForm></MessageForm>
-
+        <ButtonComponent />
+        <MessageForm />
       </div>
     </>
-  )
+  );
 }
 
 export default App;
