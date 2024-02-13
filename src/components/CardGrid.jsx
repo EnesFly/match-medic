@@ -22,7 +22,8 @@ const CardGrid = ({
         >
             {cardData && cardData.map((card,index) => 
             <Grid item key={index}>
-                <Button>
+                <Button
+                  onClick={() => onCheckboxChange(card.id, card.isChecked)}>
                   <Card 
                   key={index}
                   image={card.image}

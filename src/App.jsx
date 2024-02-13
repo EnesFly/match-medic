@@ -59,6 +59,46 @@ const DummyData = [
     image: gengarMegaImage,
     title: 'Card 6',
   },
+  {
+    id: 6,
+    image: arcanineImage,
+    title: 'Card 1',
+  },
+  {
+    id: 7,
+    image: charizardMegaxImage,
+    title: 'Card 2',
+  },
+  {
+    id: 8,
+    image: charizardMegayImage,
+    title: 'Card 3',
+  },
+  {
+    id: 9,
+    image: laprasImage,
+    title: 'Card 4',
+  },
+  {
+    id: 10,
+    image: dragoniteImage,
+    title: 'Card 5',
+  },
+  {
+    id: 11,
+    image: gengarMegaImage,
+    title: 'Card 6',
+  },
+  {
+    id: 12,
+    image: gengarMegaImage,
+    title: 'Card 6',
+  },
+  {
+    id: 12,
+    image: gengarMegaImage,
+    title: 'Card 6',
+  },
 ];
 
   

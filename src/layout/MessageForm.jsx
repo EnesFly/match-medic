@@ -8,48 +8,27 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 const MessageForm = () => {
-
-    const inputProps = {
-        textInput: {
-          disableUnderline:true,
-            style:{
-                    borderRadius:"3em",
-                    height:"20rem",
-                    overflow:"hidden",
-                
-                
-                
-    
-            }} };
     const styles={
-        message:{
-          height:"20rem",
-          width:"40rem",
-          border: "1px solid rgba(68, 68, 68, 0.3)",
-          padding:"2rem",
-          borderRadius:"3em",
-          boxShadow:" 0 2px 4px rgba(0, 0, 0, .2)",
-          paddingBottom:"20rem", // Not ideal but works
-          display:"flex",
+        mainContainer:{
+          padding:"2rem 15rem 2rem 15rem",
+          borderTop:"1px solid black",
+          borderBottom:"1px solid rgba(204, 204, 204,0.9)",
         },
-        fileBrowser:{
-            borderRadius:"3em",
+        inputMessage:{
+            borderRadius:"2rem",
             backgroundColor:"white",
-            alignContent:"flex-start",
-            display:"flex",
-            justifyContent:"center",
-            
+        },
+        inputFileBrowser:{
+            borderRadius:"2rem",
+            backgroundColor:"white",
         }
+        
     }
   return (
-    <Box sx={{
-        padding:"2rem",
-        borderTop:"1px solid rgb(204, 204, 204)",
-        borderBottom:"1px solid rgb(204, 204, 204)",
-        borderRadius:"3em"
-        }}
+    <Box sx={
+        styles.mainContainer
+        }
         justifyContent={"center"}
-        alignContent={"center"}
         display={"flex"}
         flexDirection={"column"}
         gap={5}>
@@ -58,22 +37,20 @@ const MessageForm = () => {
           justifyContent="center"
           direction="row"
           gap={5}
-          sx={{borderRadius:"3em"}}
+          sx={{borderRadius:"2rem"}}
         >
           <Stack sx={{
             border: "1px solid rgb(204, 204, 204)",
             padding:"2rem",
-            borderRadius:"3em",
+            borderRadius:"2rem",
             boxShadow:" 0 2px 4px rgba(0, 0, 0, .2)",
             backgroundColor:"rgb(204, 204, 204)",
-            
-            
+            width:"35rem",
+            minWidth:"35rem",
             }}
-            overflow={"hidden"}
             direction="column"
             justifyContent="space-between"
-            alignItems="center"
-            gap={1}
+            gap={2}
     
             >
               <Typography 
@@ -83,29 +60,109 @@ const MessageForm = () => {
                   Create your message
                 </Typography>
               
-                <input
+                {/* <input
                 placeholder='message'
                 style={styles.message}
-                ></input>
+                ></input> */}
                 
                 <TextField 
-                sx={styles.fileBrowser}
-                InputProps={inputProps.textInput}
+                sx={styles.inputMessage}
+                InputProps={{
+                  style: {
+                    borderRadius: "2rem",
+                    height: "20rem",
+                    alignItems: "start",
+                  }
+                }}
                 id="outlined-basic"
-                placeholder="File Browser"
+                placeholder="Hello, I am looking for..."
                 variant="outlined"
-                size='small'
-                InputLabelProps={{shrink: false}}
-                hiddenLabel={true}
-                
-                
-                />
+              />
 
+              <Stack
+              direction="column"
+              justifyContent="center"
+              sx={{
+                borderRadius:"3em",
+                backgroundColor:"white",
+              }}
+              >
                 
-                
+              <TextField
+              contentEditable={false}
+              InputProps={{
+                endAdornment:
+                <Button 
+                variant="contained"
+                whitespace="nowrap"
+                disableElevation={true}
+                size='string'
+                sx={{
+                  paddingRight:"2rem",
+                  paddingLeft:"2rem",
+                  borderRadius:"3em",
+                  backgroundColor:"rgba(0, 0, 0,0.6)",
+                  height:"2rem",
+                  whiteSpace:"nowrap",
+                  "&:hover":{
+                    backgroundColor:"rgba(115, 139, 130,0.6)",
+                    color:"black",
+                    
+                  }
+                  
+                }}
+              >
+                <Typography sx={{fontSize:"0.8rem"}}variant='h7'>Upload Files</Typography>
+              </Button>,
+                style: {
+                  borderRadius: "1rem",
+                  height:"2rem",
+                  paddingRight:0,
+                }
+              }}
+              variant="outlined"
+              placeholder='Choose files to upload'
+              sx={{
+                borderRadius:"1rem",
+                margin:"1rem",
+                backgroundColor:"rgba(0, 0, 0, .2)",
+                height:"2rem",
+              }}>
+              </TextField>
+
+              <TextField
+              InputProps={{
+                style: {
+                  borderRadius: "1rem",
+                }
+              }}
+              sx={{
+                margin:"1rem",
+              }}
+              >
+
+              </TextField>
               
-              <FormControlLabel  control={<Checkbox defaultChecked />} flexWrap={"wrap"} label="lorem ipsum da ipsum da ipsum" />
-              <Button variant="contained" color="inherit" sx={{borderRadius:"3em"}}>Login</Button>
+              </Stack>
+              
+                
+                  
+                
+              <FormControlLabel
+              control={<Checkbox  defaultChecked />} 
+              label = {<Typography sx={{fontWeight:"bold", fontSize:"0.8rem"}}>Stay anonymous</Typography>}
+              >
+              </FormControlLabel>
+              <Button
+              disableElevation={true}
+              variant="contained" 
+              color="inherit"
+              sx={{
+                borderRadius:"3em",
+              }}
+              >Login
+              </Button>
+
           </Stack>
           <Stack
           sx={{
@@ -113,6 +170,8 @@ const MessageForm = () => {
             padding:"2rem",
             borderRadius:"3em",
             boxShadow:" 0 2px 4px rgba(0, 0, 0, .2)",
+            minWidth:"35rem",
+            
             }}
           >
 
