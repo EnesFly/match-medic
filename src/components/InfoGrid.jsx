@@ -42,7 +42,6 @@ const InfoGrid = () => {
     const imageRef = ref(storage, imagePath);
 
     try {
-      console.log("Fetching image from path:", imagePath);
       const url = await getDownloadURL(imageRef);
       return url;
     } catch (error) {
@@ -56,23 +55,21 @@ const InfoGrid = () => {
       <Typography variant="h4" component="h2" gutterBottom>
         How Match Medic works?
       </Typography>
-      <Grid item container justifyContent="center" alignItems="center" spacing={2}>
+      <Grid item container justifyContent="center" alignItems="center">
         {infoSteps.map((step, index) => (
           <React.Fragment key={index}>
-            {index > 0 && (
-              <Grid item>
-                {arrowUrl && (
-                  <img 
-                    src={arrowUrl} 
-                    alt="Arrow" 
-                    style={{ width: 'auto', height: 'auto', maxWidth: '10%', maxHeight: '10%' }} 
-                  />
-                )}
-              </Grid>
-            )}
             <Grid item>
               <Card image={step.image} title={step.text} />
             </Grid>
+            {index < infoSteps.length - 1 && arrowUrl && (
+              <Grid item style={{ maxWidth: '64px', flexGrow: 0 }}>
+                <img 
+                  src={arrowUrl} 
+                  alt="Arrow" 
+                  style={{ width: '100%', height: 'auto' }} 
+                />
+              </Grid>
+            )}
           </React.Fragment>
         ))}
       </Grid>
