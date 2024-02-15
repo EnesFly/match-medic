@@ -61,7 +61,13 @@ const InfoGrid = () => {
           <React.Fragment key={index}>
             {index > 0 && (
               <Grid item>
-                {arrowUrl && <img src={arrowUrl} alt="Arrow" />}
+                {arrowUrl && (
+                  <img 
+                    src={arrowUrl} 
+                    alt="Arrow" 
+                    style={{ width: 'auto', height: 'auto', maxWidth: '10%', maxHeight: '10%' }} 
+                  />
+                )}
               </Grid>
             )}
             <Grid item>
