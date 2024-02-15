@@ -17,6 +17,7 @@ import charizardMegayImage from './assets/dummyassets/charizard-megay.gif';
 import laprasImage from './assets/dummyassets/lapras.gif';
 import dragoniteImage from './assets/dummyassets/dragonite.gif';
 import gengarMegaImage from './assets/dummyassets/gengar-mega.gif';
+import InfoGrid from './components/InfoGrid';
 
 const App = () => {
   const [state, setState] = useState({
@@ -139,6 +140,7 @@ const DummyData = [
       <div style={{display: "flex", flexDirection: "column", gap: 10}}>
         <CssBaseline />
         <Appbar />
+        <InfoGrid />
         <LoginForm />
         <Typography sx={{paddingTop: 1, paddingBottom: 2}} variant='h5' align='center'>Select Clinics</Typography>
         <CardGrid
