@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card';
+import InfoCard from './InfoCard';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
@@ -7,7 +8,7 @@ import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 const infoSteps = [
   {
     image: 'gs://match-medic-p0.appspot.com/info_panel/hair-transplant.png',
-    text: 'Select hair transplant clinics* Choose as many clinics as you want as your recipients'
+    text: 'Select hair transplant clinics Choose as many clinics as you want as your recipients'
   },
   {
     image: 'gs://match-medic-p0.appspot.com/info_panel/hair-transplant.png',
@@ -58,8 +59,8 @@ const InfoGrid = () => {
       <Grid item container justifyContent="center" alignItems="center">
         {infoSteps.map((step, index) => (
           <React.Fragment key={index}>
-            <Grid item>
-              <Card image={step.image} title={step.text} />
+            <Grid item lg={1.2}>
+              <InfoCard image={step.image} text={step.text} />
             </Grid>
             {index < infoSteps.length - 1 && arrowUrl && (
               <Grid item style={{ maxWidth: '64px', flexGrow: 0 }}>
