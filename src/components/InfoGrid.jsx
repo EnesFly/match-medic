@@ -7,24 +7,24 @@ import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 
 const infoSteps = [
   {
-    image: 'gs://match-medic-p0.appspot.com/info_panel/hair-transplant.png',
+    image: 'gs://match-medic-p0.appspot.com/resources/vector_images/infogrid_1_image.svg',
     text: 'Select hair transplant clinics Choose as many clinics as you want as your recipients'
   },
   {
-    image: 'gs://match-medic-p0.appspot.com/info_panel/hair-transplant.png',
+    image: 'gs://match-medic-p0.appspot.com/resources/vector_images/infogrid_2_image.svg',
     text: 'Ask for anything! Write your message and attach your photos which will be collectively delivered to your recipient clinics'
   },
   {
-    image: 'gs://match-medic-p0.appspot.com/info_panel/hair-transplant.png',
+    image: 'gs://match-medic-p0.appspot.com/resources/vector_images/infogrid_3_image.svg',
     text: 'Get replies collectively Match Medic will make sure that you get your replies as fast as possible in an organized way'
   },
   {
-    image: 'gs://match-medic-p0.appspot.com/info_panel/hair-transplant.png',
+    image: 'gs://match-medic-p0.appspot.com/resources/vector_images/infogrid_4_image.svg',
     text: 'Choose the best offer! Inspect replies, compare prices and choose the best option for you in one place!'
   }
 ];
 
-const arrowImagePath = 'gs://match-medic-p0.appspot.com/info_panel/right.png';
+const arrowImagePath = 'gs://match-medic-p0.appspot.com/resources/vector_images/generic/arrow.svg';
 
 const InfoGrid = () => {
   const [arrowUrl, setArrowUrl] = useState('');
