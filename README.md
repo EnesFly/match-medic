@@ -1,10 +1,14 @@
-match-medic.com mockup_v5
+match-medic.com mockup_v6
 
 Neutral landing page;
-![mockup_v5_Landing Page - neutral](https://github.com/EnesFly/match-medic/assets/156937752/1f39292b-fa88-4f7a-9847-3cd662cf90a9)
+![mockup_v6_landing_page_neutral](https://github.com/EnesFly/match-medic/assets/156937752/55c48138-ac86-4c22-887c-c75dc200f8a4)
+
 
 User signed in, selected clinics, completed the form and uploaded photos;
-![mockup_v5_Landing Page - interacted](https://github.com/EnesFly/match-medic/assets/156937752/e307cd7d-2dce-480b-84cb-19ddc5ebed45)
+![mockup_v6_landing_page_interaction](https://github.com/EnesFly/match-medic/assets/156937752/52037f30-2b09-43f5-98a1-39a5c03e77d4)
+
+Figma file;
+
 
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
