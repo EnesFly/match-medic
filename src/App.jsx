@@ -5,12 +5,12 @@ import { CssBaseline, Typography } from '@mui/material';
 import ButtonComponent from './components/Button';
 import CardGrid from './components/CardGrid';
 import MessageForm from './layout/MessageForm';
+import Footer from './layout/Footer';
 import { db } from "./firebase";
 import { collection, getDocs } from 'firebase/firestore'; 
 
-console.log("App script started.");
+console.log("App started.");
 
-// 
 import arcanineImage from './assets/dummyassets/arcanine.gif';
 import charizardMegaxImage from './assets/dummyassets/charizard-megax.gif';
 import charizardMegayImage from './assets/dummyassets/charizard-megay.gif';
@@ -150,6 +150,7 @@ const DummyData = [
         />
         <ButtonComponent />
         <MessageForm />
+        <Footer/>
       </div>
     </>
   );
