@@ -1,7 +1,8 @@
 match-medic.com mockup_v6
 
 Neutral landing page;
-![mockup_v6_landing_page_neutral](https://github.com/EnesFly/match-medic/assets/156937752/55c48138-ac86-4c22-887c-c75dc200f8a4)
+![mockup_v6_landing_page_neutral](https://github.com/EnesFly/match-medic/assets/156937752/c05fab8b-f1fe-48d0-8256-64a262e69770)
+
 
 
 User signed in, selected clinics, completed the form and uploaded photos;
