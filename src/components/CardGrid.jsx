@@ -3,7 +3,7 @@ import Card from './Card'
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Checkbox from '@mui/material/Checkbox';
+import Checkbox from './CheckBox';
 const CardGrid = ({
     cardData,
     isCheckedArray,
@@ -23,7 +23,7 @@ const CardGrid = ({
             {cardData && cardData.map((card,index) => 
             <Grid item key={index}>
                 <Button
-                  onClick={() => onCheckboxChange(card.id, card.isChecked)}>
+                  onClick={() => onCheckboxChange(card.index, card.isChecked)}>
                   <Card 
                   key={index}
                   image={card.image}
@@ -36,7 +36,15 @@ const CardGrid = ({
               <Checkbox
                 checked={isCheckedArray[index]}
                 onChange={()=>{onCheckboxChange(card.id, card.isChecked)}} />
-              <Typography gutterBottom variant="h5" component="div" sx={{padding:0, marginBottom: 0}}>
+              <Typography 
+              gutterBottom 
+              variant="h5" 
+              component="div" 
+              multiline
+              sx={{
+                padding:0, 
+                marginBottom: 0}}
+              >
                 {card.title}
               </Typography>
                 </div>

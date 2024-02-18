@@ -9,7 +9,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Box from '@mui/material/Box';
 
-export default function MenuAppBar() {
+export default function MenuAppBar({
+  paddingBottom
+}) {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -26,8 +28,10 @@ export default function MenuAppBar() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box sx={{ 
+      flexGrow: 1,
+      paddingBottom:paddingBottom }}>
+      <AppBar>
         <Toolbar>
           <IconButton
             size="large"

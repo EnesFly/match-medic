@@ -41,7 +41,7 @@ export default function MediaCard({ image, title }) {
         <div style={styles.imageContainer}>
           <CardMedia
             sx={{ height: 150, width: 150, justifyContent: 'center', alignItems: 'center', objectFit: "contain" }}
-            image={imageUrl} // Use the state variable storing the fetched URL
+            image={image} // Use the state variable storing the fetched URL
             component="img"
             loading="lazy"
           />
@@ -56,6 +56,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    overflow:"hidden"
   },
 checkboxContainer : {
     display: 'flex',

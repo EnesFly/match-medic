@@ -131,15 +131,38 @@ const DummyData = [
     id: 12,
     image: gengarMegaImage,
     title: 'Card 6',
+    
+  },
+  {
+    id: 10,
+    image: dragoniteImage,
+    title: 'Card 5',
+  },
+  {
+    id: 11,
+    image: gengarMegaImage,
+    title: 'Card 6',
+  },
+  {
+    id: 12,
+    image: gengarMegaImage,
+    title: 'Card 6',
+  },
+  {
+    id: 12,
+    image: gengarMegaImage,
+    title: 'Card 6',
+    
   },
 ];
 
-  
   return (
     <>
-      <div style={{display: "flex", flexDirection: "column", gap: 10}}>
+      <div style={{display: "flex", flexDirection: "column", gap: 10, height:"100vh"}}>
         <CssBaseline />
-        <Appbar />
+        <Appbar
+        paddingBottom={"84px"}
+        />
         <InfoGrid />
         <LoginForm />
         <Typography sx={{paddingTop: 1, paddingBottom: 2}} variant='h5' align='center'>Select Clinics</Typography>

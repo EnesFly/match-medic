@@ -56,18 +56,18 @@ const InfoGrid = () => {
       <Typography variant="h4" component="h2" gutterBottom>
         How Match Medic works?
       </Typography>
-      <Grid item container justifyContent="center" alignItems="center">
+      <Grid item container justifyContent="center" alignItems="center" spacing={2}>
         {infoSteps.map((step, index) => (
           <React.Fragment key={index}>
-            <Grid item lg={1.2}>
+            <Grid item lg={1.3}>
               <InfoCard image={step.image} text={step.text} />
             </Grid>
             {index < infoSteps.length - 1 && arrowUrl && (
-              <Grid item style={{ maxWidth: '64px', flexGrow: 0 }}>
+              <Grid item style={{ maxWidth: '64px'}}>
                 <img 
                   src={arrowUrl} 
                   alt="Arrow" 
-                  style={{ width: '100%', height: 'auto' }} 
+                  style={{ width: '100%', height: 'auto', }} 
                 />
               </Grid>
             )}

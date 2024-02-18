@@ -30,7 +30,9 @@ export default function InfoCard({ image, text }) {
   }, [image]);
 
   return (
-    <Card>
+    <Card
+    sx={{minHeight:300, width:200}}
+    >
       <CardMedia
         sx={{ height: 150, width: '100%', justifyContent: 'center', alignItems: 'center', objectFit: "contain" }}
         image={imageUrl}
