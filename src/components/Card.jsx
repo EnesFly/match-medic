@@ -41,7 +41,7 @@ export default function MediaCard({ image, title }) {
         <div style={styles.imageContainer}>
           <CardMedia
             sx={{ height: 150, width: 150, justifyContent: 'center', alignItems: 'center', objectFit: "contain" }}
-            image={image} // Use the state variable storing the fetched URL
+            image={imageUrl} // Use the state variable storing the fetched URL
             component="img"
             loading="lazy"
           />
