@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/system/Box';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
@@ -6,8 +6,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { useState, useEffect } from 'react';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import { db } from "../firebase";
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const GAP_VALUE = 20; // gap between the image and message form
 
@@ -29,6 +30,7 @@ const MessageForm = () => {
     };
 
     const [imageUrl, setImageUrl] = useState('');
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
         const imagePath = 'gs://match-medic-p0.appspot.com/resources/vector_images/message_bubbles.svg';
@@ -42,6 +44,23 @@ const MessageForm = () => {
                 console.error("Error loading image:", error);
             });
     }, []);
+
+    const handleSubmit = async () => {
+        if (message.trim() === '') {
+            console.error("Message field is empty.");
+            return;
+        }
+        try {
+            await addDoc(collection(db, "messageforms"), {
+                message: message,
+                timestamp: serverTimestamp(),
+            });
+            console.log("Document successfully written!");
+            setMessage('');
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
 
     return (
         <Box sx={styles.mainContainer}
@@ -60,7 +79,7 @@ const MessageForm = () => {
                     border: "1px solid rgb(204, 204, 204)",
                     padding: "2rem",
                     borderRadius: "2rem",
-                    boxShadow: " 0 2px 4px rgba(0, 0, 0, .2)",
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, .2)",
                     backgroundColor: "rgb(204, 204, 204)",
                     width: "35rem",
                     minWidth: "35rem",
@@ -88,9 +107,11 @@ const MessageForm = () => {
                         id="outlined-basic"
                         placeholder="Hello, I am looking for..."
                         variant="outlined"
+                        value={message} 
+                        onChange={(e) => setMessage(e.target.value)} 
                     />
 
-                    <Stack
+<Stack
                         direction="column"
                         justifyContent="center"
                         sx={{
@@ -159,8 +180,7 @@ const MessageForm = () => {
                     <FormControlLabel
                         control={<Checkbox defaultChecked />}
                         label={<Typography sx={{ fontWeight: "bold", fontSize: "0.8rem" }}>Stay anonymous</Typography>}
-                    >
-                    </FormControlLabel>
+                    />
                     <Button
                         disableElevation={true}
                         variant="contained"
@@ -168,16 +188,17 @@ const MessageForm = () => {
                         sx={{
                             borderRadius: "3em",
                         }}
-                    >Login
+                        onClick={handleSubmit}
+                    >
+                        Login
                     </Button>
 
                 </Stack>
-                <Stack // I WANT THE SVG FILE INSIDE HERE!
+                <Stack 
                     sx={{
                         padding: "2rem",
                         borderRadius: "3em",
                         minWidth: "35rem",
-
                     }}
                 >
                     {imageUrl && <img src={imageUrl} alt="Message Bubbles" style={{ maxWidth: '100%', height: 'auto' }} />}
