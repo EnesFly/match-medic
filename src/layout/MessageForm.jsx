@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/system/Box';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
@@ -6,8 +6,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { useState, useEffect } from 'react';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import { db } from "../firebase"; // Ensure you have this import for db if not already imported
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const GAP_VALUE = 20; // gap between the image and message form
 
@@ -29,6 +30,7 @@ const MessageForm = () => {
     };
 
     const [imageUrl, setImageUrl] = useState('');
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
         const imagePath = 'gs://match-medic-p0.appspot.com/resources/vector_images/message_bubbles.svg';
@@ -42,6 +44,19 @@ const MessageForm = () => {
                 console.error("Error loading image:", error);
             });
     }, []);
+
+    const handleSubmit = async () => {
+        try {
+            await addDoc(collection(db, "messageforms"), {
+                message: message,
+                timestamp: serverTimestamp(),
+            });
+            console.log("Document successfully written!");
+            setMessage(''); // Clear the message field after successful submission
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
 
     return (
         <Box sx={styles.mainContainer}
@@ -88,7 +103,7 @@ const MessageForm = () => {
                         id="outlined-basic"
                         placeholder="Hello, I am looking for..."
                         variant="outlined"
-                    />
+                        />
 
                     <Stack
                         direction="column"
@@ -168,16 +183,16 @@ const MessageForm = () => {
                         sx={{
                             borderRadius: "3em",
                         }}
+                        onClick={handleSubmit}
                     >Login
                     </Button>
 
                 </Stack>
-                <Stack // I WANT THE SVG FILE INSIDE HERE!
+                <Stack // Image display stack
                     sx={{
                         padding: "2rem",
                         borderRadius: "3em",
                         minWidth: "35rem",
-
                     }}
                 >
                     {imageUrl && <img src={imageUrl} alt="Message Bubbles" style={{ maxWidth: '100%', height: 'auto' }} />}
