@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
-import { db } from "../firebase"; // Ensure you have this import for db if not already imported
+import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const GAP_VALUE = 20; // gap between the image and message form
@@ -46,13 +46,17 @@ const MessageForm = () => {
     }, []);
 
     const handleSubmit = async () => {
+        if (message.trim() === '') {
+            console.error("Message field is empty.");
+            return;
+        }
         try {
             await addDoc(collection(db, "messageforms"), {
                 message: message,
                 timestamp: serverTimestamp(),
             });
             console.log("Document successfully written!");
-            setMessage(''); // Clear the message field after successful submission
+            setMessage('');
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -75,7 +79,7 @@ const MessageForm = () => {
                     border: "1px solid rgb(204, 204, 204)",
                     padding: "2rem",
                     borderRadius: "2rem",
-                    boxShadow: " 0 2px 4px rgba(0, 0, 0, .2)",
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, .2)",
                     backgroundColor: "rgb(204, 204, 204)",
                     width: "35rem",
                     minWidth: "35rem",
@@ -103,9 +107,11 @@ const MessageForm = () => {
                         id="outlined-basic"
                         placeholder="Hello, I am looking for..."
                         variant="outlined"
-                        />
+                        value={message} 
+                        onChange={(e) => setMessage(e.target.value)} 
+                    />
 
-                    <Stack
+<Stack
                         direction="column"
                         justifyContent="center"
                         sx={{
@@ -174,8 +180,7 @@ const MessageForm = () => {
                     <FormControlLabel
                         control={<Checkbox defaultChecked />}
                         label={<Typography sx={{ fontWeight: "bold", fontSize: "0.8rem" }}>Stay anonymous</Typography>}
-                    >
-                    </FormControlLabel>
+                    />
                     <Button
                         disableElevation={true}
                         variant="contained"
@@ -184,11 +189,12 @@ const MessageForm = () => {
                             borderRadius: "3em",
                         }}
                         onClick={handleSubmit}
-                    >Login
+                    >
+                        Login
                     </Button>
 
                 </Stack>
-                <Stack // Image display stack
+                <Stack 
                     sx={{
                         padding: "2rem",
                         borderRadius: "3em",
