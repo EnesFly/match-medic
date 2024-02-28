@@ -8,6 +8,7 @@ import MessageForm from './layout/MessageForm';
 import Footer from './layout/Footer';
 import { db } from "./firebase";
 import { collection, getDocs } from 'firebase/firestore'; 
+import { monitorAuthState } from './components/authentication/auth-services';
 
 console.log("App started.");
 
@@ -24,6 +25,21 @@ const App = () => {
     isCheckedArray: [false, false, false, false, false, false],
     clinics: [] // State to hold clinics data
   });
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    console.log("Setting up auth state listener");
+    const unsubscribe = monitorAuthState((isAuthenticated) => {
+      console.log("User authentication status:", isAuthenticated);
+      setIsAuthenticated(isAuthenticated);
+    });
+    return () => {
+      console.log("Cleaning up auth state listener");
+      unsubscribe();
+    };
+  }, []);
+  
 
   const handleCheckboxChange = (index) => {
     const updatedArray = [...state.isCheckedArray];
@@ -164,7 +180,7 @@ const DummyData = [
         paddingBottom={"84px"}
         />
         <InfoGrid />
-        <LoginForm />
+        {!isAuthenticated && <LoginForm />}
         <Typography sx={{paddingTop: 1, paddingBottom: 2}} variant='h5' align='center'>Select Clinics</Typography>
         <CardGrid
           cardData={state.clinics} 
