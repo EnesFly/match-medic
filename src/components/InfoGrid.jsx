@@ -53,14 +53,25 @@ const InfoGrid = () => {
 
   return (
     <Grid container direction="column" alignItems="center" justifyContent="center">
-      <Typography variant="h4" component="h2" gutterBottom>
+      <Typography fontweight="bold" variant="boldHeader" component="h2" gutterBottom>
         How Match Medic works?
       </Typography>
       <Grid item container justifyContent="center" alignItems="center" spacing={2}>
         {infoSteps.map((step, index) => (
           <React.Fragment key={index}>
             <Grid item lg={1.3}>
-              <InfoCard image={step.image} text={step.text} />
+              <InfoCard 
+              image={step.image} 
+              text={step.text} 
+              textstyle={{ fontSize: '0.75rem'}} 
+              cardstyle={{
+                width:'200px', 
+                height:'250px', 
+                border:"1px solid rgb(204, 204, 204)",
+                borderRadius:"2rem",
+                padding:"0.5rem",
+                boxShadow: 0 ,}}//Bad practice take them to theme or create a style object
+              />
             </Grid>
             {index < infoSteps.length - 1 && arrowUrl && (
               <Grid item style={{ maxWidth: '64px'}}>

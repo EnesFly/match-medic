@@ -22,7 +22,7 @@ async function getFromFirebaseStorage(imagePath) {
   }
 }
 
-export default function InfoCard({ image, text }) {
+export default function InfoCard({ image, text, textstyle, cardstyle }) {
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function InfoCard({ image, text }) {
 
   return (
     <Card
-    sx={{minHeight:300, width:200}}
+    sx={{...cardstyle}}
     >
       <CardMedia
         sx={{ height: 150, width: '100%', justifyContent: 'center', alignItems: 'center', objectFit: "contain" }}
@@ -39,7 +39,7 @@ export default function InfoCard({ image, text }) {
         component="img"
         loading="lazy"
       />
-      <Typography align="center" sx={{ marginTop: 2 }}>
+      <Typography align="center" sx={{ ...textstyle  }}>
         {text}
       </Typography>
     </Card>

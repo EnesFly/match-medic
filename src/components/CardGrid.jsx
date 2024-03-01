@@ -43,7 +43,10 @@ const CardGrid = ({
               multiline
               sx={{
                 padding:0, 
-                marginBottom: 0}}
+                marginBottom: 0,
+                fontWeight:600,
+                whiteSpace: "nowrap"
+              }}
               >
                 {card.title}
               </Typography>

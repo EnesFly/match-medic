@@ -8,11 +8,16 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+
+import {signOutUser} from '../components/authentication/auth-services.js';
+import {signIn} from '../components/authentication/auth-services.js';
 
 export default function MenuAppBar({
-  paddingBottom
+  paddingBottom,
+  isAuth,
+  avatarImage,//Avatar image from firebase
 }) {
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleChange = (event) => {
@@ -30,7 +35,8 @@ export default function MenuAppBar({
   return (
     <Box sx={{ 
       flexGrow: 1,
-      paddingBottom:paddingBottom }}>
+      paddingBottom:paddingBottom,
+       }}>
       <AppBar>
         <Toolbar>
           <IconButton
@@ -40,12 +46,11 @@ export default function MenuAppBar({
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            MATCH MEDIC
+          <Typography variant="h" component="div" sx={{ flexGrow: 1 }}>
+            Contact affordable hair transplant clinics of turkey
           </Typography>
-          {auth && (
+          {(
             <div >
                 <IconButton
                 size="large"
@@ -70,10 +75,15 @@ export default function MenuAppBar({
                 size="large"
                 color="inherit"
                 sx={{m:1}}
+                onClick={() => {isAuth ? signOutUser() : signIn()}}
               >
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                  Log in
+                  {isAuth ? 'Logout' : 'Login'}
                 </Typography>
+              </IconButton>
+
+              <IconButton>
+              <Avatar />
               </IconButton>
               
               <Menu

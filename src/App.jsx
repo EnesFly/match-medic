@@ -7,7 +7,7 @@ import CardGrid from './components/CardGrid';
 import MessageForm from './layout/MessageForm';
 import Footer from './layout/Footer';
 import { db } from "./firebase";
-import { collection, getDocs } from 'firebase/firestore'; 
+import { collection, getDocs } from 'firebase/firestore';
 import { monitorAuthState } from './components/authentication/auth-services';
 
 console.log("App started.");
@@ -177,11 +177,12 @@ const DummyData = [
       <div style={{display: "flex", flexDirection: "column", gap: 10, height:"100vh"}}>
         <CssBaseline />
         <Appbar
+        isAuth={isAuthenticated}
         paddingBottom={"84px"}
         />
         <InfoGrid />
         {!isAuthenticated && <LoginForm />}
-        <Typography sx={{paddingTop: 1, paddingBottom: 2}} variant='h5' align='center'>Select Clinics</Typography>
+        <Typography sx={{paddingTop: 1, paddingBottom: 2}} variant='boldHeader' align='center'>Select Clinics</Typography>
         <CardGrid
           cardData={state.clinics} 
           onCheckboxChange={handleCheckboxChange}
