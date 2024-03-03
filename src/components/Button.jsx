@@ -1,12 +1,14 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 
-export default function ButtonComponent() {
+export default function ButtonComponent(
+    backgroundColor
+) {
     // State to keep track of the number of recipients
     const [selectedRecipients, setSelectedRecipients] = React.useState(0);
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '10%' }}>
+        <div style={{ backgroundColor:backgroundColor, display: 'flex', justifyContent: 'flex-end', paddingRight: '10%' }}>
             
             <Button variant="text">
                 You have selected

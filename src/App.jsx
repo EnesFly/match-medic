@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Appbar from './layout/Appbar';
 import LoginForm from './layout/LoginForm';
 import { CssBaseline, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import ButtonComponent from './components/Button';
 import CardGrid from './components/CardGrid';
 import MessageForm from './layout/MessageForm';
@@ -12,12 +13,6 @@ import { monitorAuthState } from './components/authentication/auth-services';
 
 console.log("App started.");
 
-import arcanineImage from './assets/dummyassets/arcanine.gif';
-import charizardMegaxImage from './assets/dummyassets/charizard-megax.gif';
-import charizardMegayImage from './assets/dummyassets/charizard-megay.gif';
-import laprasImage from './assets/dummyassets/lapras.gif';
-import dragoniteImage from './assets/dummyassets/dragonite.gif';
-import gengarMegaImage from './assets/dummyassets/gengar-mega.gif';
 import InfoGrid from './components/InfoGrid';
 
 const App = () => {
@@ -77,119 +72,45 @@ const App = () => {
     fetchClinics();
   }, []);
 
-const DummyData = [
-  {
-    id: 0,
-    image: arcanineImage,
-    title: 'Card 1',
-  },
-  {
-    id: 1,
-    image: charizardMegaxImage,
-    title: 'Card 2',
-  },
-  {
-    id: 2,
-    image: charizardMegayImage,
-    title: 'Card 3',
-  },
-  {
-    id: 3,
-    image: laprasImage,
-    title: 'Card 4',
-  },
-  {
-    id: 4,
-    image: dragoniteImage,
-    title: 'Card 5',
-  },
-  {
-    id: 5,
-    image: gengarMegaImage,
-    title: 'Card 6',
-  },
-  {
-    id: 6,
-    image: arcanineImage,
-    title: 'Card 1',
-  },
-  {
-    id: 7,
-    image: charizardMegaxImage,
-    title: 'Card 2',
-  },
-  {
-    id: 8,
-    image: charizardMegayImage,
-    title: 'Card 3',
-  },
-  {
-    id: 9,
-    image: laprasImage,
-    title: 'Card 4',
-  },
-  {
-    id: 10,
-    image: dragoniteImage,
-    title: 'Card 5',
-  },
-  {
-    id: 11,
-    image: gengarMegaImage,
-    title: 'Card 6',
-  },
-  {
-    id: 12,
-    image: gengarMegaImage,
-    title: 'Card 6',
-  },
-  {
-    id: 12,
-    image: gengarMegaImage,
-    title: 'Card 6',
-    
-  },
-  {
-    id: 10,
-    image: dragoniteImage,
-    title: 'Card 5',
-  },
-  {
-    id: 11,
-    image: gengarMegaImage,
-    title: 'Card 6',
-  },
-  {
-    id: 12,
-    image: gengarMegaImage,
-    title: 'Card 6',
-  },
-  {
-    id: 12,
-    image: gengarMegaImage,
-    title: 'Card 6',
-    
-  },
-];
+  const theme = useTheme();
 
   return (
     <>
-      <div style={{display: "flex", flexDirection: "column", gap: 10, height:"100vh"}}>
+      <div style={{display: "flex", flexDirection: "column", gap: 10, height:"100vh", backgroundColor: theme.palette.primary.backgroundDefault}}>
         <CssBaseline />
         <Appbar
         isAuth={isAuthenticated}
         paddingBottom={"84px"}
         />
         <InfoGrid />
-        {!isAuthenticated && <LoginForm />}
-        <Typography sx={{paddingTop: 1, paddingBottom: 2}} variant='boldHeader' align='center'>Select Clinics</Typography>
+        {!isAuthenticated && <LoginForm
+        backgroundColor={theme.palette.primary.main}
+        />}
+        <Typography 
+        sx={{
+          paddingTop: "1rem",
+          backgroundColor: theme.palette.primary.main
+          }} variant='boldHeader' align='center'>Select Clinics</Typography>
+          <Typography 
+        sx={{
+          zIndex: 1,
+          paddingBottom: "1rem",
+          fontSize:"1rem",
+          backgroundColor: theme.palette.primary.main
+          }} variant='boldHeader' align='center'>*only the best hair transplant clinics from Istanbul, Turkey</Typography>
         <CardGrid
+          cardBorderColor={theme.palette.primary.borderColor}
+          backgroundColor={theme.palette.primary.main}
           cardData={state.clinics} 
           onCheckboxChange={handleCheckboxChange}
           isCheckedArray={state.isCheckedArray}
         />
-        <ButtonComponent />
-        <MessageForm />
+        <ButtonComponent 
+        backgroundColor={theme.palette.primary.main}
+        />
+        <MessageForm
+        backgroundColor={theme.palette.primary.main}
+        />
         <Footer/>
       </div>
     </>

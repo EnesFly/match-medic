@@ -28,19 +28,30 @@ async function getFromFirebaseStorage(imagePath) {
   }
 }
 
-export default function MediaCard({ image, title }) {
+export default function MediaCard({ 
+  image, 
+  title,
+  backgroundColor,
+  cardBorderColor,
+ }) {
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
     getFromFirebaseStorage(image).then(setImageUrl);
   }, [image]); // Buna gerek var mı tam emin olamadım.
-
+  
   return (
     <>
-      <Card>
+      <Card
+      sx={{
+        ml:1,
+        border: `1px solid ${cardBorderColor}`,
+        borderRadius: "1rem",
+      }}
+      >
         <div style={styles.imageContainer}>
           <CardMedia
-            sx={{ height: 150, width: 150, justifyContent: 'center', alignItems: 'center', objectFit: "contain" }}
+            sx={{ height: 150, width: 150,objectFit: "contain" }}
             image={imageUrl} // Use the state variable storing the fetched URL
             component="img"
             loading="lazy"

@@ -1,11 +1,13 @@
 import * as React from 'react';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Typography from '@mui/material/Typography';
 
-export default function CheckboxLabels({
+export default function MMCheckbox({
   checkedIcon,
   unCheckedIcon,
-  label
+  label,
+  onChange
 }) {
   return (
     
@@ -13,10 +15,13 @@ export default function CheckboxLabels({
         <FormControlLabel 
         control={
         <Checkbox
-          icon={unCheckedIcon}
           checkedIcon={checkedIcon}
+          icon={unCheckedIcon}
+          onChange={onChange}
         />}
-        label={label} />
+        label={
+          <Typography style={{justifyContent:'center', display:'flex'}}>{label}</Typography>
+        } />
       </div>
     
   );

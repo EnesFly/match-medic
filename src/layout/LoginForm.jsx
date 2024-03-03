@@ -7,8 +7,11 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { signUp, signIn } from '../components/authentication/auth-services';
+import { useTheme } from '@emotion/react';
 
-const LoginForm = () => {
+const LoginForm = (
+  backgroundColor
+) => {
   // State for sign-up
   const [signUpEmail, setSignUpEmail] = useState('');
   const [signUpPassword, setSignUpPassword] = useState('');
@@ -26,7 +29,10 @@ const LoginForm = () => {
   };
 
   const styles = {
-    textInput: { width: "20rem" }
+    textInput: { 
+      width: "20rem",
+      backgroundColor: "white"
+     }
   };
 
   const handleSignUp = async () => {
@@ -48,10 +54,11 @@ const LoginForm = () => {
       console.error('Error logging in:', error.message);
     }
   };
-
+  const theme = useTheme();
   return (
     <Box sx={{
       padding: "2rem",
+      backgroundColor: backgroundColor,
       borderTop: "1px solid rgb(204, 204, 204)",
       borderBottom: "1px solid rgb(204, 204, 204)",
     }}
@@ -59,7 +66,7 @@ const LoginForm = () => {
       alignContent={"center"}
       display={"flex"}
       flexDirection={"column"}
-      gap={5}>
+      >
 
       <Stack
         justifyContent="center"
@@ -70,24 +77,23 @@ const LoginForm = () => {
           border: "1px solid rgb(204, 204, 204)",
           padding: "2rem",
           borderRadius: "3em",
-          boxShadow: " 0 2px 4px rgba(0, 0, 0, .2)",
         }}
           direction="column"
           justifyContent="space-between"
           alignItems="center"
-          gap={1}
+          gap={2}
         >
       <Typography variant="boldHeader" align='center'>Get Started</Typography>
 
-          <Button 
+          <Button
+            onClick={handleSignUp}
             sx={{
               width:"20rem",
               borderRadius: "3em",
               height: "3em",
               transition: 'background-color .3s, box-shadow .3s',
               padding: '12px 16px 12px 42px',
-              border: 'none',
-              boxShadow: '0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25)',
+              border: '1px solid ' + theme.palette.primary.borderColor,
               color: '#757575',
               backgroundImage: 'url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=)',
               backgroundColor: 'white',
@@ -96,15 +102,8 @@ const LoginForm = () => {
               justifyContent: 'flex-start',
               alignItems: 'center',
               '&:hover': {
-                boxShadow: '0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25)'
-              },
-              '&:active': {
-                backgroundColor: '#eeeeee'
-              },
-              '&:focus': {
-                outline: 'none',
-                boxShadow: '0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25), 0 0 0 3px #c8dafc'
-              },
+                border: "1px solid black",
+              }
               }
             }
           >
@@ -134,16 +133,40 @@ const LoginForm = () => {
             value={signUpPassword}
             onChange={(e) => setSignUpPassword(e.target.value)}
           />
+          <Box
+           direction="row"
+           sx={{
+            mt:"1.5rem"
+           }}
+          >
+            <Button 
+            variant="contained" 
+            color="inherit" 
+            sx={{ 
+              borderRadius: "3em",
+              marginLeft: "1.5rem",
+              marginRight: "2rem",
+           }} 
+            onClick={handleSignUp}>Sign up
+            </Button>
 
-          <FormControlLabel  control={<Checkbox defaultChecked />} flexWrap={"wrap"} label="lorem ipsum da ipsum da ipsum" />
-          <Button variant="contained" color="inherit" sx={{ borderRadius: "3em" }} onClick={handleSignUp}>Sign up</Button>
+            <Button 
+            variant="contained" 
+            color="inherit" 
+            sx={{ 
+              borderRadius: "3em",
+              marginLeft: "2rem",
+              marginRight: "1.5rem",
+             }} 
+            onClick={handleSignUp}>Log ın
+            </Button>
+          </Box>
       </Stack>
 
       <Stack sx={{
         border: "1px solid rgb(204, 204, 204)",
         padding:"2rem",
         borderRadius:"3em",
-        boxShadow:" 0 2px 4px rgba(0, 0, 0, .2)",
         }}
         direction="column"
         justifyContent="space-between"

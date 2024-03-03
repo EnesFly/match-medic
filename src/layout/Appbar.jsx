@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
-
+import { useTheme } from '@emotion/react';
 import {signOutUser} from '../components/authentication/auth-services.js';
 import {signIn} from '../components/authentication/auth-services.js';
 
@@ -32,12 +32,19 @@ export default function MenuAppBar({
     setAnchorEl(null);
   };
 
+  const theme = useTheme();
   return (
     <Box sx={{ 
       flexGrow: 1,
       paddingBottom:paddingBottom,
-       }}>
-      <AppBar>
+       }}
+
+       >
+      <AppBar
+      sx={{
+        borderBottom: '1px solid ' + theme.palette.primary.borderColor,
+      }}
+      >
         <Toolbar>
           <IconButton
             size="large"

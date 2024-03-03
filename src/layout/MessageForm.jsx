@@ -12,12 +12,15 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const GAP_VALUE = 20; // gap between the image and message form
 
-const MessageForm = () => {
+const MessageForm = (
+    backgroundColor
+) => {
     const styles = {
         mainContainer: {
             padding: "2rem 15rem 2rem 15rem",
             borderTop: "1px solid black",
             borderBottom: "1px solid rgba(204, 204, 204,0.9)",
+            backgroundColor:backgroundColor
         },
         inputMessage: {
             borderRadius: "2rem",

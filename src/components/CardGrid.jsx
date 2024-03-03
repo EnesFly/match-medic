@@ -1,55 +1,94 @@
 /* eslint-disable react/prop-types */
+import React from 'react';
 import Card from './Card'
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Checkbox from './CheckBox';
+import { FilledInput } from '@mui/material';
+import getFromFirebaseStorage from '../utils/getFromFirebaseStorage';
+import MMCheckbox from './MMCheckBox';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+
+const Icons = {
+  checkboxAdd: 'gs://match-medic-p0.appspot.com/resources/vector_images/generic/checkbox_add.svg',
+  checkboxEmpty: 'gs://match-medic-p0.appspot.com/resources/vector_images/generic/checkbox_empty.svg',
+  checkboxChecked: 'gs://match-medic-p0.appspot.com/resources/vector_images/generic/checkbox_true.svg',
+};
+
 const CardGrid = ({
+    backgroundColor,
     cardData,
     isCheckedArray,
-    onCheckboxChange
+    onCheckboxChange,
+    cardBorderColor
 }) => {
-    
+  const [checkboxAdd, setcheckboxAdd] = React.useState('');
+  const [checkboxEmpty, setcheckboxEmpty] = React.useState('');
+  const [checkboxChecked, setcheckboxChecked] = React.useState('');
+
+  React.useEffect(() => {
+    getFromFirebaseStorage(Icons.checkboxAdd).then(setcheckboxAdd);
+    getFromFirebaseStorage(Icons.checkboxEmpty).then(setcheckboxEmpty);
+    getFromFirebaseStorage(Icons.checkboxChecked).then(setcheckboxChecked);
+  }, [checkboxAdd, checkboxEmpty, checkboxChecked]);
+  
   return (
     <div >
         <Grid
+        sx={{
+          backgroundColor: backgroundColor
+        }}
         lg="auto"
         item
         container
         justifyContent="center"
         alignItems="center"
-        spacing={6}
+        spacing={4}
         >
             {cardData && cardData.map((card,index) => 
-            <Grid item key={index}>
+            <Grid item justifyContent="center" key={index}>
                 <Button
                   onClick={() => onCheckboxChange(card.index, card.isChecked)}>
-                  <Card 
+                  <Card
+                  cardBorderColor={cardBorderColor}
                   key={index}
                   image={card.image}
                   title={card.name}
                   link={card.link}
-                  
               />
                 </Button>
-                <div style={{display: 'flex', alignItems: 'center', marginTop:10}}>
-              <Checkbox
-                checked={isCheckedArray[index]}
-                onChange={()=>{onCheckboxChange(card.id, card.isChecked)}} />
-              <Typography 
-              gutterBottom 
-              variant="h5" 
-              component="div" 
-              multiline
+                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:10}}>
+              <FilledInput
+              readOnly={true}
+              contentEditable = {false}
+              disableUnderline = {true}
               sx={{
-                padding:0, 
-                marginBottom: 0,
-                fontWeight:600,
-                whiteSpace: "nowrap"
+                borderRadius: "1rem",
+                backgroundColor: backgroundColor ,
+                "&:hover": { backgroundColor: "transparent" }
               }}
+              inputProps={{
+                style: {
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height:44,
+                  textAlign: 'center',
+                  fontWeight: 700,
+                  borderBottom: 0
+                }}
+              }
+              multiline
+              value={card.title}
               >
-                {card.title}
-              </Typography>
+              </FilledInput>
+              <MMCheckbox
+                unCheckedIcon={<AddCircleIcon/>}
+                checkedIcon={<CheckCircleIcon/>}
+                checked={isCheckedArray[index]}
+                onChange={()=>{onCheckboxChange(card.id, card.isChecked)}} 
+                label={<Typography sx={{fontSize:"0.75rem"}}variant="subtitle2">{isCheckedArray[index]? "Added!": "Add recipient"}</Typography>}
+                />
                 </div>
             </Grid>
             )} 
