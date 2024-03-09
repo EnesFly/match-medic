@@ -19,7 +19,6 @@ const Icons = {
 const CardGrid = ({
     backgroundColor,
     cardData,
-    isCheckedArray,
     onCheckboxChange,
     cardBorderColor
 }) => {
@@ -32,7 +31,6 @@ const CardGrid = ({
     getFromFirebaseStorage(Icons.checkboxEmpty).then(setcheckboxEmpty);
     getFromFirebaseStorage(Icons.checkboxChecked).then(setcheckboxChecked);
   }, [checkboxAdd, checkboxEmpty, checkboxChecked]);
-  
   return (
     <div >
         <Grid
@@ -46,10 +44,11 @@ const CardGrid = ({
         alignItems="center"
         spacing={4}
         >
-            {cardData && cardData.map((card,index) => 
+            {cardData && Object.values(cardData).map((card, index) =>
+            
             <Grid item justifyContent="center" key={index}>
                 <Button
-                  onClick={() => onCheckboxChange(card.index, card.isChecked)}>
+                  onClick={()=>{onCheckboxChange(card.id)} }>
                   <Card
                   cardBorderColor={cardBorderColor}
                   key={index}
@@ -85,9 +84,9 @@ const CardGrid = ({
               <MMCheckbox
                 unCheckedIcon={<AddCircleIcon/>}
                 checkedIcon={<CheckCircleIcon/>}
-                checked={isCheckedArray[index]}
-                onChange={()=>{onCheckboxChange(card.id, card.isChecked)}} 
-                label={<Typography sx={{fontSize:"0.75rem"}}variant="subtitle2">{isCheckedArray[index]? "Added!": "Add recipient"}</Typography>}
+                checked={card.isChecked}
+                onChange={() => onCheckboxChange(card.id)} 
+                label={<Typography sx={{fontSize:"0.75rem"}}variant="subtitle2">{card.isChecked? "Added!": "Add recipient"}</Typography>}
                 />
                 </div>
             </Grid>

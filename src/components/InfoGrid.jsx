@@ -59,7 +59,7 @@ const InfoGrid = () => {
       <Grid item container justifyContent="center" alignItems="center" spacing={2}>
         {infoSteps.map((step, index) => (
           <React.Fragment key={index}>
-            <Grid item lg={1.3}>
+            <Grid item lg={1.5}>
               <InfoCard 
               image={step.image} 
               text={step.text} 

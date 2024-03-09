@@ -6,6 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import Snackbar from '@mui/material/Snackbar';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
@@ -31,7 +32,7 @@ const MessageForm = (
             backgroundColor: "white",
         }
     };
-
+    const [open, setOpen] = useState(false);
     const [imageUrl, setImageUrl] = useState('');
     const [message, setMessage] = useState('');
 
@@ -107,6 +108,7 @@ const MessageForm = (
                                 alignItems: "start",
                             }
                         }}
+                        multiline
                         id="outlined-basic"
                         placeholder="Hello, I am looking for..."
                         variant="outlined"
@@ -128,6 +130,7 @@ const MessageForm = (
                             InputProps={{
                                 endAdornment:
                                     <Button
+                                        onClick={() => {setOpen(!open)}}
                                         variant="contained"
                                         whitespace="nowrap"
                                         disableElevation={true}
@@ -166,6 +169,7 @@ const MessageForm = (
                         </TextField>
 
                         <TextField
+                        multiline
                             InputProps={{
                                 style: {
                                     borderRadius: "1rem",
@@ -208,7 +212,17 @@ const MessageForm = (
                 </Stack>
 
             </Stack>
+            <Snackbar
+         message={
+         <Typography
+         >
+           Please select at least one clinic (No validation Firebase Props???)
+           </Typography>
+           }
+         open={open}
+         ></Snackbar>
         </Box>
+         
     );
 }
 
