@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Appbar from './layout/Appbar';
 import LoginForm from './layout/LoginForm';
-import { CssBaseline, Snackbar, Typography } from '@mui/material';
+import { CssBaseline, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import ButtonComponent from './components/Button';
 import CardGrid from './components/CardGrid';
 import MessageForm from './layout/MessageForm';
 import Footer from './layout/Footer';
 import { db } from "./firebase";
 import { collection, getDocs } from 'firebase/firestore';
 import { monitorAuthState } from './components/authentication/auth-services';
-import MMSnackbar from './components/Snackbar';
-
+import { AuthContext } from './contexts/isAuth';
 console.log("App started.");
 
 import InfoGrid from './components/InfoGrid';
@@ -21,12 +19,11 @@ const App = () => {
     clinics: [] // State to hold clinics data
   });
 
-  const [isCheckedArray, setIsCheckedArray] = useState({});
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
+  console.log(isAuthenticated);
   const {clinics} = state;
-  console.log(clinics);
 
-  useEffect(() => {
+  /* useEffect(() => {
     console.log("Setting up auth state listener");
     const unsubscribe = monitorAuthState((isAuthenticated) => {
       console.log("User authentication status:", isAuthenticated);
@@ -36,7 +33,7 @@ const App = () => {
       console.log("Cleaning up auth state listener");
       unsubscribe();
     };
-  }, []);
+  }, []); */
 
   const handleCheckboxChange = (id) => {
     const updatedClinics = clinics.map(clinic => {
@@ -50,13 +47,13 @@ const App = () => {
   };
 
 const fetchClinics = async () => {
-  console.log("Attempting to fetch clinics..."); 
+  /* console.log("Attempting to fetch clinics...");  */
   try {
     const clinicsCol = collection(db, 'clinics'); 
     const clinicSnapshot = await getDocs(clinicsCol); 
-    console.log(`${clinicSnapshot.docs.length} clinics fetched.`); 
+    /* console.log(`${clinicSnapshot.docs.length} clinics fetched.`); */
     const clinicsData = clinicSnapshot.docs.map(doc => {
-      console.log(doc.id, doc.data()); 
+      /* console.log(doc.id, doc.data()); */
       return {
         id: doc.id, 
         image: doc.data().logo, 
@@ -69,7 +66,7 @@ const fetchClinics = async () => {
       clinics: clinicsData
     }));
   } catch (error) {
-    console.error("Error fetching clinics:", error); 
+    /* console.error("Error fetching clinics:", error); */ 
   }
 };
 
@@ -90,7 +87,6 @@ const fetchClinics = async () => {
         }}>
         <CssBaseline />
         <Appbar
-        isAuth={isAuthenticated}
         paddingBottom={"84px"}
         />
         <InfoGrid />
@@ -112,7 +108,6 @@ const fetchClinics = async () => {
           backgroundColor={theme.palette.primary.main}
           cardData={clinics}
           onCheckboxChange={handleCheckboxChange}
-          isCheckedArray={isCheckedArray}
         />
         <MessageForm
         backgroundColor={theme.palette.primary.main}

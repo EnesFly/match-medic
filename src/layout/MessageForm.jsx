@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Box from '@mui/system/Box';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
@@ -7,9 +7,11 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
+import MMSnackbar from '../components/MMSnackbar'
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { AuthContext } from '../contexts/isAuth';
 
 const GAP_VALUE = 20; // gap between the image and message form
 
@@ -32,10 +34,6 @@ const MessageForm = (
             backgroundColor: "white",
         }
     };
-    const [open, setOpen] = useState(false);
-    const [imageUrl, setImageUrl] = useState('');
-    const [message, setMessage] = useState('');
-
     useEffect(() => {
         const imagePath = 'gs://match-medic-p0.appspot.com/resources/vector_images/message_bubbles.svg';
         const storage = getStorage();
@@ -48,7 +46,12 @@ const MessageForm = (
                 console.error("Error loading image:", error);
             });
     }, []);
+    const  {isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
+    const [open, setOpen] = useState(false);
+    const [imageUrl, setImageUrl] = useState('');
+    const [message, setMessage] = useState('');
 
+    
     const handleSubmit = async () => {
         if (message.trim() === '') {
             console.error("Message field is empty.");
@@ -62,9 +65,14 @@ const MessageForm = (
             console.log("Document successfully written!");
             setMessage('');
         } catch (e) {
+            
             console.error("Error adding document: ", e);
         }
     };
+
+    const validateMessage = (message) => {
+        
+    }
 
     return (
         <Box sx={styles.mainContainer}
@@ -116,7 +124,7 @@ const MessageForm = (
                         onChange={(e) => setMessage(e.target.value)} 
                     />
 
-<Stack
+                    <Stack
                         direction="column"
                         justifyContent="center"
                         sx={{
@@ -210,17 +218,8 @@ const MessageForm = (
                 >
                     {imageUrl && <img src={imageUrl} alt="Message Bubbles" style={{ maxWidth: '100%', height: 'auto' }} />}
                 </Stack>
-
+                <Snackbar />
             </Stack>
-            <Snackbar
-         message={
-         <Typography
-         >
-           Please select at least one clinic (No validation Firebase Props???)
-           </Typography>
-           }
-         open={open}
-         ></Snackbar>
         </Box>
          
     );

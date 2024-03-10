@@ -19,11 +19,11 @@ async function getFromFirebaseStorage(imagePath) {
   const imageRef = ref(storage, imagePath);
   
   try {
-    console.log("Fetching image from path:", imagePath);
+    /* console.log("Fetching image from path:", imagePath); */
     const url = await getDownloadURL(imageRef);
     return url;
   } catch (error) {
-    console.error("Error fetching image URL:", error);
+    /* console.error("Error fetching image URL:", error); */
     return ''; // Buraya default bir image atılabilir
   }
 }

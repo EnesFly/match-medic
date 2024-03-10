@@ -158,7 +158,7 @@ const LoginForm = (
               marginLeft: "2rem",
               marginRight: "1.5rem",
              }} 
-            onClick={handleSignUp}>Log ın
+            onClick={handleSignIn}>Log in
             </Button>
           </Box>
       </Stack>

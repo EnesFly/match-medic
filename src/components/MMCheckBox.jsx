@@ -7,9 +7,13 @@ export default function MMCheckbox({
   checkedIcon,
   unCheckedIcon,
   label,
-  onChange
-}) {
+  onChange,
+  checked
+}) 
+
+{
   return (
+    
     
       <div style={{ justifyContent:'center'}} >
         <FormControlLabel 
@@ -18,6 +22,7 @@ export default function MMCheckbox({
           checkedIcon={checkedIcon}
           icon={unCheckedIcon}
           onChange={onChange}
+          checked={checked}
         />}
         label={
           <Typography style={{justifyContent:'center', display:'flex'}}>{label}</Typography>

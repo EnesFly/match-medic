@@ -53,7 +53,7 @@ const InfoGrid = () => {
 
   return (
     <Grid container direction="column" alignItems="center" justifyContent="center">
-      <Typography fontweight="bold" variant="boldHeader" component="h2" gutterBottom>
+      <Typography variant="boldHeader" component="h2" gutterBottom>
         How Match Medic works?
       </Typography>
       <Grid item container justifyContent="center" alignItems="center" spacing={2}>

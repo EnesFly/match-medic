@@ -4,17 +4,17 @@ import Card from './Card'
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { FilledInput } from '@mui/material';
+import { Checkbox, FilledInput } from '@mui/material';
 import getFromFirebaseStorage from '../utils/getFromFirebaseStorage';
 import MMCheckbox from './MMCheckBox';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-const Icons = {
+/* const Icons = {
   checkboxAdd: 'gs://match-medic-p0.appspot.com/resources/vector_images/generic/checkbox_add.svg',
   checkboxEmpty: 'gs://match-medic-p0.appspot.com/resources/vector_images/generic/checkbox_empty.svg',
   checkboxChecked: 'gs://match-medic-p0.appspot.com/resources/vector_images/generic/checkbox_true.svg',
-};
+}; */
 
 const CardGrid = ({
     backgroundColor,
@@ -22,7 +22,7 @@ const CardGrid = ({
     onCheckboxChange,
     cardBorderColor
 }) => {
-  const [checkboxAdd, setcheckboxAdd] = React.useState('');
+  /* const [checkboxAdd, setcheckboxAdd] = React.useState('');
   const [checkboxEmpty, setcheckboxEmpty] = React.useState('');
   const [checkboxChecked, setcheckboxChecked] = React.useState('');
 
@@ -30,7 +30,7 @@ const CardGrid = ({
     getFromFirebaseStorage(Icons.checkboxAdd).then(setcheckboxAdd);
     getFromFirebaseStorage(Icons.checkboxEmpty).then(setcheckboxEmpty);
     getFromFirebaseStorage(Icons.checkboxChecked).then(setcheckboxChecked);
-  }, [checkboxAdd, checkboxEmpty, checkboxChecked]);
+  }, [checkboxAdd, checkboxEmpty, checkboxChecked]); */
   return (
     <div >
         <Grid
@@ -83,10 +83,16 @@ const CardGrid = ({
               </FilledInput>
               <MMCheckbox
                 unCheckedIcon={<AddCircleIcon/>}
-                checkedIcon={<CheckCircleIcon/>}
+                checkedIcon={
+                <CheckCircleIcon
+                style={{ backgroundColor: '#CC8F93', borderRadius: '60%' }}
+                />
+              }
                 checked={card.isChecked}
                 onChange={() => onCheckboxChange(card.id)} 
-                label={<Typography sx={{fontSize:"0.75rem"}}variant="subtitle2">{card.isChecked? "Added!": "Add recipient"}</Typography>}
+                label={<Typography component="span" sx={{fontSize:"0.75rem"}} >
+                  {card.isChecked? "Added!": "Add recipient"}
+                </Typography>}
                 />
                 </div>
             </Grid>

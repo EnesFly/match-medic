@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useContext} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -10,10 +11,10 @@ import Avatar from '@mui/material/Avatar';
 import { useTheme } from '@emotion/react';
 import {signOutUser} from '../components/authentication/auth-services.js';
 import {signIn} from '../components/authentication/auth-services.js';
+import { AuthContext } from '../contexts/isAuth.jsx';
 
 export default function MenuAppBar({
   paddingBottom,
-  isAuth,
   avatarImage,//Avatar image from firebase
 }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -31,6 +32,7 @@ export default function MenuAppBar({
   };
 
   const theme = useTheme();
+  const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
   return (
     <Box sx={{ 
       flexGrow: 1,
@@ -80,15 +82,15 @@ export default function MenuAppBar({
                 size="large"
                 color="inherit"
                 sx={{m:1}}
-                onClick={() => {isAuth ? signOutUser() : signIn()}}
+                onClick={() => {isAuthenticated ? signOutUser() : signIn()}}
               >
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                  {isAuth ? 'Login' : 'Logout'}
+                  {isAuthenticated ? 'Logout' : 'Login'}
                 </Typography>
               </IconButton>
 
               <IconButton>
-              {isAuth && <Avatar/>}
+              {isAuthenticated && <Avatar/>}
               </IconButton>
               
               <Menu
