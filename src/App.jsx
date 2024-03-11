@@ -18,9 +18,8 @@ const App = () => {
   const [state, setState] = useState({
     clinics: [] // State to hold clinics data
   });
-
+  const [isLoading, setLoading] = useState(true);
   const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
-  console.log(isAuthenticated);
   const {clinics} = state;
 
   /* useEffect(() => {
@@ -66,7 +65,10 @@ const fetchClinics = async () => {
       clinics: clinicsData
     }));
   } catch (error) {
+    
     /* console.error("Error fetching clinics:", error); */ 
+  } finally {
+    setLoading(false);
   }
 };
 
@@ -103,14 +105,15 @@ const fetchClinics = async () => {
           fontSize:"1rem",
           backgroundColor: theme.palette.primary.main
           }} variant='boldHeader' align='center'>*only the best hair transplant clinics from Istanbul, Turkey</Typography>
-        <CardGrid
+        {!isLoading && <CardGrid
           cardBorderColor={theme.palette.primary.borderColor}
           backgroundColor={theme.palette.primary.main}
-          cardData={clinics}
+          cardData={!isLoading && clinics}
           onCheckboxChange={handleCheckboxChange}
-        />
+        />}
         <MessageForm
         backgroundColor={theme.palette.primary.main}
+        clinics={isLoading ? [] : clinics}
         />
         <Footer/>
       </div>

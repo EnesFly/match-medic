@@ -12,12 +12,15 @@ import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { AuthContext } from '../contexts/isAuth';
+import { IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 const GAP_VALUE = 20; // gap between the image and message form
 
-const MessageForm = (
-    backgroundColor
-) => {
+const MessageForm = ({
+    backgroundColor,
+    clinics
+}) => {
     const styles = {
         mainContainer: {
             padding: "2rem 15rem 2rem 15rem",
@@ -28,6 +31,7 @@ const MessageForm = (
         inputMessage: {
             borderRadius: "2rem",
             backgroundColor: "white",
+            overflow: "hidden",
         },
         inputFileBrowser: {
             borderRadius: "2rem",
@@ -50,13 +54,10 @@ const MessageForm = (
     const [open, setOpen] = useState(false);
     const [imageUrl, setImageUrl] = useState('');
     const [message, setMessage] = useState('');
-
-    
+    const [snackbarState, setSnackbarState] = useState(false);
+    const [snackbarText, setSnackbarText] = useState('');
+    const [checkboxState, setCheckboxState] = useState(false);
     const handleSubmit = async () => {
-        if (message.trim() === '') {
-            console.error("Message field is empty.");
-            return;
-        }
         try {
             await addDoc(collection(db, "messageforms"), {
                 message: message,
@@ -67,12 +68,47 @@ const MessageForm = (
         } catch (e) {
             
             console.error("Error adding document: ", e);
+        } finally {
+            setSnackbarText("Message sent successfully!");
+            setSnackbarState(open);
         }
     };
-
-    const validateMessage = (message) => {
-        
+    
+    const validateMessage = () => {
+        const checkedClinics = clinics.filter(clinic => clinic.isChecked == true).map(clinic => clinic);
+        if(checkedClinics.length == 0){
+            setSnackbarText("Please select at least one clinic.");
+            setSnackbarState(true);
+            return false;
+        }
+        if (message.trim() === '') {
+            setSnackbarText("Message field is empty.");
+            setSnackbarState(true);
+            return false;
+        }
+        if (message.length > 10000) {
+            setSnackbarText("Message is too long.");
+            setSnackbarState(true);
+            return false;
+        }
+        if(!checkboxState){
+            setSnackbarText("Please accept the terms and conditions.");
+            setSnackbarState(true);
+            return false;
+        }
+        if(!isAuthenticated){
+            setSnackbarText("Please sign in to submit the message.");
+            setSnackbarState(true);
+            return false;
+        }
+        return true;
     }
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackbarState(false);
+    };
 
     return (
         <Box sx={styles.mainContainer}
@@ -193,7 +229,12 @@ const MessageForm = (
                     </Stack>
 
                     <FormControlLabel
-                        control={<Checkbox defaultChecked />}
+                        control={
+                        <Checkbox
+                        onChange={() => setCheckboxState(!checkboxState)}
+                        value={checkboxState}
+                        />
+                        }
                         label={<Typography sx={{ fontWeight: "bold", fontSize: "0.8rem" }}>Stay anonymous</Typography>}
                     />
                     <Button
@@ -203,9 +244,12 @@ const MessageForm = (
                         sx={{
                             borderRadius: "3em",
                         }}
-                        onClick={handleSubmit}
+                        onClick={()=>{
+                            validateMessage()
+                            &&
+                            handleSubmit()}}
                     >
-                        Login
+                        Submit
                     </Button>
 
                 </Stack>
@@ -218,10 +262,27 @@ const MessageForm = (
                 >
                     {imageUrl && <img src={imageUrl} alt="Message Bubbles" style={{ maxWidth: '100%', height: 'auto' }} />}
                 </Stack>
-                <Snackbar />
             </Stack>
+            <Snackbar
+            open={snackbarState}
+            autoHideDuration={4000}
+            message={snackbarText}
+            onClose={handleSnackbarClose}
+            action={
+            <React.Fragment>
+                <IconButton
+                aria-label="close"
+                color="inherit"
+                sx={{ p: 0.5 }}
+                onClick={()=>{setSnackbarState(!snackbarState);}}
+                >
+                <CloseIcon />
+                </IconButton>
+            </React.Fragment>
+         }
+       />
         </Box>
-         
+        
     );
 }
 
