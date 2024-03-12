@@ -6,7 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { signUp, signIn } from '../components/authentication/auth-services';
+import { signUp, signIn, googleSignUp } from '../components/authentication/auth-services';
 import { useTheme } from '@emotion/react';
 
 const LoginForm = (
@@ -54,6 +54,17 @@ const LoginForm = (
       console.error('Error logging in:', error.message);
     }
   };
+
+  const handleGoogleSignUp = async () => {
+    try {
+      await googleSignUp();
+      console.log('Google signup attempt.')
+    } catch (error) {
+      console.log('Google signup attempt failed:', error.message);
+    }
+
+  };
+
   const theme = useTheme();
   return (
     <Box sx={{
@@ -86,7 +97,7 @@ const LoginForm = (
       <Typography variant="boldHeader" align='center'>Get Started</Typography>
 
           <Button
-            onClick={handleSignUp}
+            onClick={(e) => handleGoogleSignUp()}
             sx={{
               width:"20rem",
               borderRadius: "3em",
