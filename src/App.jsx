@@ -77,18 +77,19 @@ const fetchClinics = async () => {
   }, []);
 
   const theme = useTheme();
-
+  const paddingRL = "50px";
   return (
     <>
       <div style={{
         display: "flex", 
         flexDirection: "column", 
         gap: 10, 
-        height:"100vh", 
+        height:"100vh",
         backgroundColor: theme.palette.primary.backgroundDefault,
         }}>
         <CssBaseline />
         <Appbar
+        paddingRightLeft={paddingRL}
         paddingBottom={"84px"}
         />
         <InfoGrid />
@@ -97,15 +98,18 @@ const fetchClinics = async () => {
         />}
         <Typography 
         sx={{
+          marginTop: 5,
           backgroundColor: theme.palette.primary.main
           }} variant='boldHeader' align='center'>Select Clinics</Typography>
           <Typography 
         sx={{
-          zIndex: 1,
           fontSize:"1rem",
-          backgroundColor: theme.palette.primary.main
+          backgroundColor: theme.palette.primary.main,
+          mb:10,
+          zIndex:1
           }} variant='boldHeader' align='center'>*only the best hair transplant clinics from Istanbul, Turkey</Typography>
         {!isLoading && <CardGrid
+          paddingRightLeft={paddingRL}
           cardBorderColor={theme.palette.primary.borderColor}
           backgroundColor={theme.palette.primary.main}
           cardData={!isLoading && clinics}
