@@ -14,8 +14,8 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { AuthContext } from '../contexts/isAuth';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-
-const GAP_VALUE = 20; // gap between the image and message form
+import Dropzone from '../components/Dropzone'
+import Grid from '@mui/material/Grid';
 
 const MessageForm = ({
     backgroundColor,
@@ -31,11 +31,10 @@ const MessageForm = ({
         inputMessage: {
             borderRadius: "2rem",
             backgroundColor: "white",
-            overflow: "hidden",
+            
         },
         inputFileBrowser: {
             borderRadius: "2rem",
-            backgroundColor: "white",
         }
     };
     useEffect(() => {
@@ -76,6 +75,7 @@ const MessageForm = ({
     
     const validateMessage = () => {
         const checkedClinics = clinics.filter(clinic => clinic.isChecked == true).map(clinic => clinic);
+        console.log(clinics);
         if(checkedClinics.length == 0){
             setSnackbarText("Please select at least one clinic.");
             setSnackbarState(true);
@@ -115,14 +115,28 @@ const MessageForm = ({
             justifyContent={"center"}
             display={"flex"}
             flexDirection={"column"}
-            gap={5}>
+            >
 
             <Stack
                 justifyContent="center"
                 direction="row"
-                gap={GAP_VALUE}
                 sx={{ borderRadius: "2rem" }}
             >
+
+            <Grid
+            sx={{
+                backgroundColor: backgroundColor
+              }}
+              container
+              justifyContent="center"
+              alignItems="center"
+              direction="row"
+              
+            >
+                <Grid
+                item
+                sx={{margin:"40px"}}
+                >
                 <Stack sx={{
                     border: "1px solid rgb(204, 204, 204)",
                     padding: "2rem",
@@ -137,7 +151,7 @@ const MessageForm = ({
                     gap={2}
                 >
                     <Typography
-                        variant='h6'
+                        variant='boldHeader'
                         align='center'
                     >
                         Create your message
@@ -164,12 +178,13 @@ const MessageForm = ({
                         direction="column"
                         justifyContent="center"
                         sx={{
-                            borderRadius: "3em",
+                            borderRadius: "2em",
                             backgroundColor: "white",
+                            padding:2
                         }}
                     >
 
-                        <TextField
+                        {/* <TextField
                             contentEditable={false}
                             InputProps={{
                                 endAdornment:
@@ -194,7 +209,11 @@ const MessageForm = ({
 
                                         }}
                                     >
-                                        <Typography sx={{ fontSize: "0.8rem" }} variant='h7'>Upload Files</Typography>
+                                        <Typography 
+                                            sx={{ fontSize: "0.8rem" }} 
+                                            variant='h7'>
+                                                Upload Files
+                                        </Typography>
                                     </Button>,
                                 style: {
                                     borderRadius: "1rem",
@@ -210,21 +229,24 @@ const MessageForm = ({
                                 backgroundColor: "rgba(0, 0, 0, .2)",
                                 height: "2rem",
                             }}>
-                        </TextField>
+                        </TextField> */}
 
-                        <TextField
+                        {/* <TextField
                         multiline
-                            InputProps={{
+                        InputProps={{
                                 style: {
                                     borderRadius: "1rem",
+                                    height: 150,
                                 }
                             }}
-                            sx={{
+                        sx={{
                                 margin: "1rem",
                             }}
                         >
-
-                        </TextField>
+                            <Dropzone></Dropzone>
+                        </TextField> */}
+                        <Dropzone/>
+                        
 
                     </Stack>
 
@@ -235,7 +257,21 @@ const MessageForm = ({
                         value={checkboxState}
                         />
                         }
-                        label={<Typography sx={{ fontWeight: "bold", fontSize: "0.8rem" }}>Stay anonymous</Typography>}
+                        label={<Typography sx={{ fontWeight: "bold", fontSize: "16px" }}>Accept the end user aggrement</Typography>}
+                    />
+                    <FormControlLabel
+                        control={
+                        <Checkbox
+                        onChange={() => setCheckboxState(!checkboxState)}
+                        value={checkboxState}
+                        />
+                        }
+                        label={
+                            <>
+                                <Typography sx={{ fontWeight: "bold", fontSize: "16px" }}>Stay anonymous</Typography>
+                                <Typography sx={{ fontSize: "15px" }}>Message will not include your name or email</Typography>
+                            </>
+                        }
                     />
                     <Button
                         disableElevation={true}
@@ -251,17 +287,26 @@ const MessageForm = ({
                     >
                         Submit
                     </Button>
+                </Stack>
+                </Grid>
 
-                </Stack>
-                <Stack 
-                    sx={{
-                        padding: "2rem",
-                        borderRadius: "3em",
-                        minWidth: "35rem",
-                    }}
+
+                <Grid
+                item
+                sx={{margin:"40px"}}
                 >
-                    {imageUrl && <img src={imageUrl} alt="Message Bubbles" style={{ maxWidth: '100%', height: 'auto' }} />}
-                </Stack>
+                    <Stack 
+                        sx={{
+                            padding: "2rem",
+                            borderRadius: "3em",
+                            minWidth: "35rem",
+                        }}
+                    >
+                        {imageUrl && <img src={imageUrl} alt="Message Bubbles" style={{ maxWidth: '100%', height: 'auto' }} />}
+                    </Stack>
+                </Grid>
+               
+            </Grid>
             </Stack>
             <Snackbar
             open={snackbarState}

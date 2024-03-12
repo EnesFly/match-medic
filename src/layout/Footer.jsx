@@ -23,12 +23,12 @@ const Footer = () => {
     <Stack 
     direction={"row"}
     sx={{ bgcolor: '#DFDFDF', width: '100%', justifyContent: 'center', }}>
-      <Container maxWidth="lg">
+      <Container>
         
         <Grid container justifyContent="space-between" alignItems="center">
           <Grid item >
-            <Box sx={{ textAlign: 'left', margin:3 }}>
-              <Typography variant="body2" sx={{ mb: 2 }}>Having problems?</Typography>
+            <Box sx={{ textAlign: 'left', mt:3 }}>
+              <Typography variant="body2" >Having problems?</Typography>
               <Typography variant="body2">info@matchmedic.com</Typography>
               <Typography variant="body2">feel free to check out FAQ</Typography>
             </Box>

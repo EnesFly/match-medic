@@ -46,9 +46,9 @@ const LoginForm = (
   };
 
   const handleSignIn = async () => {
-    console.log('Log in button clicked, email:', logInEmail, 'password:', logInPassword);
+    console.log('Log in button clicked, email:', signUpEmail, 'password:', signUpPassword);
     try {
-      const userCredential = await signIn(logInEmail, logInPassword);
+      const userCredential = await signIn(signUpEmail, signUpPassword);
       console.log('User logged in successfully:', userCredential.user);
     } catch (error) {
       console.error('Error logging in:', error.message);

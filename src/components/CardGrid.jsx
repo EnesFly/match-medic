@@ -20,7 +20,8 @@ const CardGrid = ({
     backgroundColor,
     cardData,
     onCheckboxChange,
-    cardBorderColor
+    cardBorderColor,
+    paddingRightLeft
 }) => {
   /* const [checkboxAdd, setcheckboxAdd] = React.useState('');
   const [checkboxEmpty, setcheckboxEmpty] = React.useState('');
@@ -35,14 +36,15 @@ const CardGrid = ({
     <div >
         <Grid
         sx={{
+          pl:paddingRightLeft,
+          pr:paddingRightLeft,
           backgroundColor: backgroundColor
         }}
-        lg="auto"
-        item
+        direction={"row"}
         container
         justifyContent="center"
         alignItems="center"
-        spacing={4}
+        spacing={5}
         >
             {cardData && Object.values(cardData).map((card, index) =>
             

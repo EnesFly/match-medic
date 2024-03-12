@@ -14,6 +14,7 @@ import {signIn} from '../components/authentication/auth-services.js';
 import { AuthContext } from '../contexts/isAuth.jsx';
 
 export default function MenuAppBar({
+  paddingRightLeft,
   paddingBottom,
   avatarImage,//Avatar image from firebase
 }) {
@@ -34,35 +35,32 @@ export default function MenuAppBar({
   const theme = useTheme();
   const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
   return (
-    <Box sx={{ 
-      flexGrow: 1,
+    <Box sx={{
+      
       paddingBottom:paddingBottom,
        }}
 
        >
       <AppBar
       sx={{
+        paddingLeft: paddingRightLeft,  // Adjust the value as needed
+        paddingRight: paddingRightLeft,  // Adjust the value as needed
         borderBottom: '1px solid ' + theme.palette.primary.borderColor,
       }}
       >
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-          </IconButton>
+        <Toolbar 
+        disableGutters
+        >
           <Typography variant="h" component="div" sx={{ flexGrow: 1 }}>
             Contact affordable hair transplant clinics of turkey
           </Typography>
           {(
-            <div >
+            <Box
+            disableGutters
+            >
                 <IconButton
                 size="large"
                 color="inherit"
-                sx={{m:1}}
                 >
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                   About Us
@@ -71,7 +69,6 @@ export default function MenuAppBar({
               <IconButton
                 size="large"
                 color="inherit"
-                sx={{m:1}}
               >
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                   FAQ
@@ -81,7 +78,6 @@ export default function MenuAppBar({
               <IconButton
                 size="large"
                 color="inherit"
-                sx={{m:1}}
                 onClick={() => {isAuthenticated ? signOutUser() : signIn()}}
               >
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -89,9 +85,9 @@ export default function MenuAppBar({
                 </Typography>
               </IconButton>
 
-              <IconButton>
-              {isAuthenticated && <Avatar/>}
-              </IconButton>
+              {isAuthenticated && <IconButton>
+               <Avatar/>
+              </IconButton>}
               
               <Menu
                 id="menu-appbar"
@@ -111,7 +107,7 @@ export default function MenuAppBar({
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
               </Menu>
-            </div>
+            </Box>
           )}
         </Toolbar>
       </AppBar>
