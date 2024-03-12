@@ -1,4 +1,5 @@
 import { auth } from '../../firebase.js';
+import { provider, signInWithGoogle } from '../../firebase.js';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
 // Sign up
@@ -15,6 +16,11 @@ export const signIn = (email, password) => {
 export const signOutUser = () => {
   return signOut(auth);
 };
+
+// Google auth
+export const googleSignUp = () => {
+  return signInWithGoogle();
+}
 
 // listener for auth
 export const monitorAuthState = (callback) => {
