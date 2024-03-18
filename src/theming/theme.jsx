@@ -7,6 +7,7 @@ const theme = createTheme({
       main: '#FAFAFA',
       backgroundDefault: '#FAFAFA',
       borderColor:'#CCCCCC',
+      itemColor:'#E5B8BB',
     },
     secondary: {
       main: green[500],

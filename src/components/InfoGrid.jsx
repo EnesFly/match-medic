@@ -74,7 +74,10 @@ const InfoGrid = () => {
               />
             </Grid>
             {index < infoSteps.length - 1 && arrowUrl && (
-              <Grid item style={{ maxWidth: '64px'}}>
+              <Grid item sx={{ 
+                maxWidth: '64px',
+                display: { xs: 'none', sm: 'none', md: 'none', lg: 'block', xl: 'block' }
+                }}>
                 <img 
                   src={arrowUrl} 
                   alt="Arrow" 

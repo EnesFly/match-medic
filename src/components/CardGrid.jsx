@@ -4,7 +4,7 @@ import Card from './Card'
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Checkbox, FilledInput } from '@mui/material';
+import { Checkbox, FilledInput, Stack } from '@mui/material';
 import getFromFirebaseStorage from '../utils/getFromFirebaseStorage';
 import MMCheckbox from './MMCheckBox';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -33,22 +33,43 @@ const CardGrid = ({
     getFromFirebaseStorage(Icons.checkboxChecked).then(setcheckboxChecked);
   }, [checkboxAdd, checkboxEmpty, checkboxChecked]); */
   return (
-    <div >
+    <Stack
+    sx={{
+      justifyContent:"center", 
+      alignItems:"center",
+      backgroundColor: backgroundColor,
+      width: "100%",
+      margin: '0 auto',
+    }}
+     >
         <Grid
         sx={{
-          pl:paddingRightLeft,
-          pr:paddingRightLeft,
-          backgroundColor: backgroundColor
+          pl:"50px",
+          pr:"50px",
+          width: "100%",
+          backgroundColor: backgroundColor,
+          justifyContent:"center",
+          alignItems:"center",
         }}
         direction={"row"}
         container
-        justifyContent="center"
-        alignItems="center"
-        spacing={5}
         >
             {cardData && Object.values(cardData).map((card, index) =>
             
-            <Grid item justifyContent="center" key={index}>
+            <Grid
+            item
+            lg={2}
+            md={4}
+            sm={6}
+            xs={12}
+            key={index}
+            sx={{
+              display: 'flex', 
+              justifyContent: 'center',
+              width: '100%',
+              flexDirection: 'column',
+            }}
+          >
                 <Button
                   onClick={()=>{onCheckboxChange(card.id)} }>
                   <Card
@@ -73,7 +94,7 @@ const CardGrid = ({
                 style: {
                   justifyContent: 'center',
                   alignItems: 'center',
-                  height:44,
+                  height:25,
                   textAlign: 'center',
                   fontWeight: 700,
                   borderBottom: 0
@@ -100,7 +121,7 @@ const CardGrid = ({
             </Grid>
             )} 
         </Grid>
-    </div>
+    </Stack>
   )
 }
 

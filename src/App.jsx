@@ -10,6 +10,7 @@ import { db } from "./firebase";
 import { collection, getDocs } from 'firebase/firestore';
 import { monitorAuthState } from './components/authentication/auth-services';
 import { AuthContext } from './contexts/isAuth';
+
 console.log("App started.");
 
 import InfoGrid from './components/InfoGrid';
@@ -18,21 +19,9 @@ const App = () => {
   const [state, setState] = useState({
     clinics: [] // State to hold clinics data
   });
+  const {clinics} = state;
   const [isLoading, setLoading] = useState(true);
   const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
-  const {clinics} = state;
-
-  /* useEffect(() => {
-    console.log("Setting up auth state listener");
-    const unsubscribe = monitorAuthState((isAuthenticated) => {
-      console.log("User authentication status:", isAuthenticated);
-      setIsAuthenticated(isAuthenticated);
-    });
-    return () => {
-      console.log("Cleaning up auth state listener");
-      unsubscribe();
-    };
-  }, []); */
 
   const handleCheckboxChange = (id) => {
     const updatedClinics = clinics.map(clinic => {
@@ -73,11 +62,12 @@ const fetchClinics = async () => {
 };
 
   useEffect(() => {
+    
     fetchClinics();
   }, []);
 
   const theme = useTheme();
-  const paddingRL = "50px";
+  const paddingRL = "130px";
   return (
     <>
       <div style={{
@@ -98,14 +88,12 @@ const fetchClinics = async () => {
         />}
         <Typography 
         sx={{
-          marginTop: 5,
           backgroundColor: theme.palette.primary.main
           }} variant='boldHeader' align='center'>Select Clinics</Typography>
           <Typography 
         sx={{
           fontSize:"1rem",
           backgroundColor: theme.palette.primary.main,
-          mb:10,
           zIndex:1
           }} variant='boldHeader' align='center'>*only the best hair transplant clinics from Istanbul, Turkey</Typography>
         {!isLoading && <CardGrid
