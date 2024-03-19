@@ -33,6 +33,8 @@ export default function MediaCard({
   title,
   backgroundColor,
   cardBorderColor,
+  cardSelectedBorderColor,
+  isSelected
  }) {
   const [imageUrl, setImageUrl] = useState('');
 
@@ -44,14 +46,19 @@ export default function MediaCard({
     <>
       <Card
       sx={{
-        ml:1,
-        border: `1px solid ${cardBorderColor}`,
+        ml: 1,
+        border: isSelected ? `3px solid ${ cardSelectedBorderColor }` : `1px solid ${ cardBorderColor}`,
         borderRadius: "1rem",
+        backgroundColor: backgroundColor,
       }}
       >
         <div style={styles.imageContainer}>
           <CardMedia
-            sx={{ height: 150, width: 150,objectFit: "contain" }}
+            sx={{ 
+              height: 150, 
+              width: 150,
+              objectFit: "contain",
+             }}
             image={imageUrl} // Use the state variable storing the fetched URL
             component="img"
             loading="lazy"

@@ -28,13 +28,6 @@ const LoginForm = (
     }
   };
 
-  const styles = {
-    textInput: { 
-      width: "20rem",
-      backgroundColor: "white"
-     }
-  };
-
   const handleSignUp = async () => {
     console.log('Sign up button clicked, email:', signUpEmail, 'password:', signUpPassword);
     try {
@@ -65,6 +58,14 @@ const LoginForm = (
 
   };
 
+  const styles = {
+    textInput: { 
+      width: "20rem",
+      backgroundColor: "white"
+    },
+  };
+
+
   const theme = useTheme();
   return (
     <Box sx={{
@@ -73,10 +74,6 @@ const LoginForm = (
       borderTop: "1px solid rgb(204, 204, 204)",
       borderBottom: "1px solid rgb(204, 204, 204)",
     }}
-      justifyContent={"center"}
-      alignContent={"center"}
-      display={"flex"}
-      flexDirection={"column"}
       >
 
       <Stack
@@ -96,34 +93,54 @@ const LoginForm = (
         >
       <Typography variant="boldHeader" align='center'>Get Started</Typography>
 
-          <Button
-            onClick={(e) => handleGoogleSignUp()}
-            sx={{
-              width:"20rem",
-              borderRadius: "3em",
-              height: "3em",
-              transition: 'background-color .3s, box-shadow .3s',
-              padding: '12px 16px 12px 42px',
-              border: '1px solid ' + theme.palette.primary.borderColor,
-              color: '#757575',
-              backgroundImage: 'url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=)',
-              backgroundColor: 'white',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: '12px 11px',
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-              '&:hover': {
-                border: "1px solid black",
-              }
-              }
-            }
-          >
-            <Typography
-            sx={{
-              textTransform: 'none',
-            }}
-            >Sign in w/Google</Typography>
-          </Button>
+      <Button
+      onClick={(e) => handleGoogleSignUp()}
+      sx={{
+        width: "20rem",
+        borderRadius: "3em",
+        height: "3em",
+        transition: 'background-color .3s, box-shadow .3s',
+        padding: '12px 16px 12px 42px',
+        border: '1px solid',
+        borderColor: 'primary.borderColor',
+        color: '#757575',
+        backgroundImage: 'url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=)',
+        backgroundColor: 'white',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: '12px 11px',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        '&:hover': {
+          border: "1px solid black",
+          backgroundSize: '28px',
+          padding: '12px 16px 12px 38px',
+          backgroundPosition: '6px 5px',
+          animation: 'iconRollSway 2s ease-out forwards'
+        },
+        '@keyframes iconRollSway': {
+          '0%': {
+            backgroundPosition: '12px 11px',
+            transform: 'rotate(0deg)',
+          },
+          '25%': {
+            transform: 'rotate(360deg)',
+          },
+          '50%': {
+            backgroundPosition: '50%',
+            transform: 'rotate(0deg)',
+          },
+          '75%': {
+            transform: 'translateX(-5px)',
+          },
+          '100%': {
+            transform: 'translateX(5px)',
+          },
+        },
+      }}
+    >
+      Sign in with Google
+    </Button>
+
 
           <TextField
             sx={styles.textInput}

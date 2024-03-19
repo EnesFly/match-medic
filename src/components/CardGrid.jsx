@@ -21,7 +21,8 @@ const CardGrid = ({
     cardData,
     onCheckboxChange,
     cardBorderColor,
-    paddingRightLeft
+    paddingRightLeft,
+    cardSelectedBorderColor
 }) => {
   /* const [checkboxAdd, setcheckboxAdd] = React.useState('');
   const [checkboxEmpty, setcheckboxEmpty] = React.useState('');
@@ -39,11 +40,13 @@ const CardGrid = ({
       alignItems:"center",
       backgroundColor: backgroundColor,
       width: "100%",
-      margin: '0 auto',
+      margin: '0',
     }}
      >
         <Grid
         sx={{
+          marginTop:5,
+          marginBottom:5,
           pl:"50px",
           pr:"50px",
           width: "100%",
@@ -78,6 +81,8 @@ const CardGrid = ({
                   image={card.image}
                   title={card.name}
                   link={card.link}
+                  cardSelectedBorderColor={cardSelectedBorderColor}
+                  isSelected={card.isChecked}
               />
                 </Button>
                 <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:10}}>

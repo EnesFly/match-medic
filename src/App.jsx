@@ -73,7 +73,6 @@ const fetchClinics = async () => {
       <div style={{
         display: "flex", 
         flexDirection: "column", 
-        gap: 10, 
         height:"100vh",
         backgroundColor: theme.palette.primary.backgroundDefault,
         }}>
@@ -97,6 +96,7 @@ const fetchClinics = async () => {
           zIndex:1
           }} variant='boldHeader' align='center'>*only the best hair transplant clinics from Istanbul, Turkey</Typography>
         {!isLoading && <CardGrid
+          cardSelectedBorderColor={theme.palette.primary.itemColor}
           paddingRightLeft={paddingRL}
           cardBorderColor={theme.palette.primary.borderColor}
           backgroundColor={theme.palette.primary.main}

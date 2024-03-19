@@ -52,7 +52,7 @@ const InfoGrid = () => {
   }
 
   return (
-    <Grid container direction="column" alignItems="center" justifyContent="center">
+    <Grid container direction="column" alignItems="center" justifyContent="center" sx={{ width: '100%', marginTop: '2rem', marginBottom: '2rem' }}>
       <Typography variant="boldHeader" component="h2" gutterBottom>
         How Match Medic works?
       </Typography>

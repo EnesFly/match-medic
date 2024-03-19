@@ -23,8 +23,7 @@ const MessageForm = ({
 }) => {
     const styles = {
         mainContainer: {
-            padding: "2rem 15rem 2rem 15rem",
-            borderTop: "1px solid black",
+            borderTop: "1px solid rgba(204, 204, 204,0.9)",
             borderBottom: "1px solid rgba(204, 204, 204,0.9)",
             backgroundColor:backgroundColor
         },
