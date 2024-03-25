@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
-import MMSnackbar from '../components/MMSnackbar'
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';

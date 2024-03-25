@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import hospIcon from '../assets/Icons/hospital.png';
 
 async function getFromFirebaseStorage(imagePath) {
   if (!imagePath) {
@@ -37,7 +38,6 @@ export default function MediaCard({
   isSelected
  }) {
   const [imageUrl, setImageUrl] = useState('');
-
   useEffect(() => {
     getFromFirebaseStorage(image).then(setImageUrl);
   }, [image]); // Buna gerek var mı tam emin olamadım.
@@ -47,7 +47,7 @@ export default function MediaCard({
       <Card
       sx={{
         ml: 1,
-        border: isSelected ? `3px solid ${ cardSelectedBorderColor }` : `1px solid ${ cardBorderColor}`,
+        boxShadow: isSelected ? `0px 0px 0px 4px  ${ cardSelectedBorderColor }` : `0px 0px 0px 1px ${ cardBorderColor}`,
         borderRadius: "1rem",
         backgroundColor: backgroundColor,
       }}
@@ -57,9 +57,9 @@ export default function MediaCard({
             sx={{ 
               height: 150, 
               width: 150,
-              objectFit: "contain",
+              objectFit: "contain"
              }}
-            image={imageUrl} // Use the state variable storing the fetched URL
+            image={hospIcon}
             component="img"
             loading="lazy"
           />

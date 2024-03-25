@@ -22,7 +22,7 @@ export default function MenuAppBar({
 }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [logoUrl, setLogoUrl] = useState('');
-  const logoPath = 'gs://match-medic-p0.appspot.com/resources/vector_images/logos/logo_gray.svg';
+  const logoPath = 'gs://match-medic-p0.appspot.com/resources/vector_images/logos/logo_color.svg';
 /* 
   const handleChange = (event) => {
     setAuth(event.target.checked);
