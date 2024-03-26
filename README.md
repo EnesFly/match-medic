@@ -1,10 +1,10 @@
 match-medic.com mockup_v7
 
 Neutral landing page;
-![landing_page_neutral_v7](https://github.com/EnesFly/match-medic/assets/156937752/ceeee47b-ecf9-4467-a2e8-2831dcf98208)
+![landing_page_neutral_v7](https://github.com/EnesFly/match-medic/assets/156937752/9d954c75-0762-490b-a4d7-4761c86cf940)
 
 User signed in, selected clinics, completed the form and uploaded photos;
-![landing_page_interacted_v7](https://github.com/EnesFly/match-medic/assets/156937752/128e78a2-bc10-4c10-a997-acdd96627d1d)
+![landing_page_interacted_v7](https://github.com/EnesFly/match-medic/assets/156937752/a7f53d42-f2d6-4a3b-b1c2-409b41feb76e)
 
 FAQ
 ![faq_v7](https://github.com/EnesFly/match-medic/assets/156937752/70516af4-a287-4dc4-b7ce-5bf8e69da157)
