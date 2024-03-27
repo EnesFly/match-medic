@@ -1,19 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Appbar from './layout/Appbar';
-import LoginForm from './layout/LoginForm';
+import Appbar from '../layout/Appbar';
+import LoginForm from '../layout/LoginForm';
 import { CssBaseline, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import CardGrid from './components/CardGrid';
-import MessageForm from './layout/MessageForm';
-import Footer from './layout/Footer';
-import { db } from "./firebase";
+import CardGrid from '../components/CardGrid';
+import MessageForm from '../layout/MessageForm';
+import Footer from '../layout/Footer';
+import { db } from "../firebase";
 import { collection, getDocs } from 'firebase/firestore';
-import { monitorAuthState } from './components/authentication/auth-services';
-import { AuthContext } from './contexts/isAuth';
+import { monitorAuthState } from '../components/authentication/auth-services';
+import { AuthContext } from '../contexts/isAuth';
+import About from './About';
+import FAQ from './FAQ';
 
 console.log("App started.");
 
-import InfoGrid from './components/InfoGrid';
+import InfoGrid from '../components/InfoGrid';
 
 const App = () => {
   const [state, setState] = useState({

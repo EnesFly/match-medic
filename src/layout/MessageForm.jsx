@@ -15,6 +15,7 @@ import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Dropzone from '../components/Dropzone'
 import Grid from '@mui/material/Grid';
+import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 
 const MessageForm = ({
     backgroundColor,
@@ -166,11 +167,31 @@ const MessageForm = ({
                         }}
                         multiline
                         id="outlined-basic"
-                        placeholder="Hello, I am looking for..."
+                        placeholder="Does the clinic cover transportation?&#10;According to my photos, how many grafts do I need?&#10;Will my operation be done by the doctor?..."
                         variant="outlined"
                         value={message} 
                         onChange={(e) => setMessage(e.target.value)} 
                     />
+
+                    <Box
+                        sx={{ justifyContent: "flex-start", alignItems: "center", pl:2}}
+                    >
+                        <Typography
+                            sx={{ fontWeight: "bold", fontSize: "13px" }}
+                        >
+                            Upload media (optional)
+                        </Typography>
+                        <Typography
+                            sx={{fontSize: "13px" }}
+                        >
+                            Accepted formats: .jpeg, .png, .jpg
+                        </Typography>
+                        <Typography
+                            sx={{fontSize: "13px" }}
+                        >
+                            Max File Size: 5MB
+                        </Typography>
+                    </Box>
 
                     <Stack
                         direction="column"
@@ -178,7 +199,10 @@ const MessageForm = ({
                         sx={{
                             borderRadius: "2em",
                             backgroundColor: "white",
-                            padding:2
+                            padding:2,
+                            '&:hover': {
+                                boxShadow: "0 0 0 1px black"  // Shadow mimicking a 1px solid black border
+                            }
                         }}
                     >
 
@@ -243,6 +267,7 @@ const MessageForm = ({
                         >
                             <Dropzone></Dropzone>
                         </TextField> */}
+                        
                         <Dropzone/>
                         
 
