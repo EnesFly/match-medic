@@ -1,36 +1,44 @@
 import React, { useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { TextField, Typography } from "@mui/material";
+import { IconButton, TextField, Typography } from "@mui/material";
+import { useTheme } from "@emotion/react";
+import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 
-const baseStyle = {
-  flex: 1,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  padding: "20px",
-  borderWidth: 2,
-  borderRadius: "2rem",
-  borderColor: "#26C2E7",
-  borderStyle: "dashed",
-  backgroundColor: "#fafafa",
-  color: "#c4c4c4",
-  outline: "none",
-  transition: "border .24s ease-in-out"
-};
-
-const activeStyle = {
-  borderColor: "#f2f"
-};
-
-const acceptStyle = {
-  borderColor: "#f8f"
-};
-
-const rejectStyle = {
-  borderColor: "#f2f"
-};
-function InputFiles({}) {
+function InputFiles() {
+  const theme = useTheme();
+  const baseStyle = {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "20px",
+    borderWidth: 2,
+    borderRadius: "2rem",
+    borderColor: theme.palette.primary.borderColor,
+    borderStyle: "dashed",
+    backgroundColor: "#fafafa",
+    color: "#c4c4c4",
+    outline: "none",
+    transition: "border .24s ease-in-out"
+  };
+  
+  const activeStyle = {
+    borderColor: "#f2f"
+  };
+  
+  const acceptStyle = {
+    borderColor: "#f8f"
+  };
+  
+  const rejectStyle = {
+    borderColor: "#f2f"
+  };
+  const dropZoneTextStyle={
+    fontWeight:"bold",
+    color:"black",
+    fontSize: "13px"
+  };
   const [files, setFiles] = useState({});
   const {
     fileRejections,
@@ -67,8 +75,9 @@ function InputFiles({}) {
     }),
     [isDragActive, isDragReject, isDragAccept]
   );
-    const acceptedFileItems = Object.keys(files).map((fileName) => {
+  const acceptedFileItems = Object.keys(files).map((fileName) => {
     const currentFile = files[fileName].file;
+    const sizeInMB = (currentFile.size / 1000000).toFixed(2);  
     const onSelectChange = (e) => {
       e.persist();
       setFiles((prevFiles) => {
@@ -81,11 +90,10 @@ function InputFiles({}) {
         };
       });
     };
-    const MBsize =((parseInt(currentFile.path) - parseInt(currentFile.size))/ 1000000).toFixed(2);
     const size = currentFile.path - currentFile.size;
     return (
 
-      `${fileName}, ${size} bytes`
+      `${fileName}, ${sizeInMB} MB`
 
     );
   });
@@ -106,27 +114,64 @@ function InputFiles({}) {
       {/* <div {...getRootProps({ style })}> */}
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
-        <em>(Only .jpeg, .jpg, .png files will be accepted)</em>
+        <FileUploadOutlinedIcon 
+        sx={{
+          fontSize: "36px",
+          color:"black"
+        }}/>
+        <Typography
+        sx={dropZoneTextStyle}
+        >Drag and Drop</Typography>
+        <Typography
+        sx={{
+          fontSize: "13px"
+        }}
+        >or</Typography>
+       <IconButton
+          sx={{
+            borderRadius: "2rem",
+            backgroundColor: "black",
+            '&:hover': {
+              backgroundColor: theme.palette.primary.borderColor, 
+            },
+          }}
+        >
+          <Typography
+            sx={[
+              dropZoneTextStyle,
+              { color: "white" },
+            ]}
+          >
+            Browse Files
+          </Typography>
+        </IconButton>
+
       </div>
-      <aside>
         <h4>Accepted files</h4>
         <TextField
-        inputProps={{style: {
-            padding: "5px",
-        }}}
-        multiline
-        value={acceptedFileItems}
-        sx={{
-            width:"100%",
-            border:"none"
-        }}
-        >
-        </TextField>
-        <h4>Rejected files</h4>
+          inputProps={{
+              style: {
+                  padding: "5px",
+                  borderRadius: "2rem", // Affects the inner input element
+              }
+          }}
+          InputProps={{
+              style: {
+                  borderRadius: "2rem", // Affects the outer Input component
+              }
+          }}
+          multiline
+          value={acceptedFileItems}
+          sx={{
+              fontSize: "12px",
+              fontWeight: "bold",
+              width:"100%",
+              borderRadius: "3rem", // Might not be necessary if the above works
+          }}
+      >
+      </TextField>
         <ul>{fileRejectionItems}</ul>
         <button onClick={() => console.log(files)}>console log files</button>
-      </aside>
     </section>
   );
 }

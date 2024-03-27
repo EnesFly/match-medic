@@ -14,6 +14,7 @@ import {signOutUser} from '../components/authentication/auth-services.js';
 import {signIn} from '../components/authentication/auth-services.js';
 import { AuthContext } from '../contexts/isAuth.jsx';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function MenuAppBar({
   paddingRightLeft,
@@ -23,6 +24,8 @@ export default function MenuAppBar({
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [logoUrl, setLogoUrl] = useState('');
   const logoPath = 'gs://match-medic-p0.appspot.com/resources/vector_images/logos/logo_color.svg';
+  const navigate = useNavigate();
+  const location = useLocation();
 /* 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -86,16 +89,22 @@ export default function MenuAppBar({
           }}
         >
           {logoUrl && (
-            <img
+            <IconButton
+              onClick={() => {navigate('/')}}
+              disableRipple
+            >
+              <img
             src={logoUrl}
             alt="Match Medic Logo"
             style={{
               transform: 'scale(0.7)',
               transformOrigin: 'center left', // Adjust this if necessary
-              
               }}
             />
+            </IconButton>
+            
           )}
+          
           <Typography 
             component="span" 
             sx={{ 
@@ -120,6 +129,7 @@ export default function MenuAppBar({
                 <IconButton
                 size="large"
                 color="inherit"
+                onClick={() => {navigate('/about')}}
                 >
                 <Typography component="div" sx={{ fontWeight: 'bold', fontSize:18 }}>
                   About Us
@@ -128,6 +138,7 @@ export default function MenuAppBar({
               <IconButton
                 size="large"
                 color="inherit"
+                onClick={() => {navigate('/faq')}}
               >
                 <Typography omponent="div" sx={{ fontWeight: 'bold', fontSize:18 }}>
                   FAQ
